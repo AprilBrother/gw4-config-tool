@@ -1,0 +1,50 @@
+{
+    "name": "GatewayConfigTool",
+    "version": "1.2.5",
+    "description": "",
+    "main": "index.js",
+    "homepage": "https://aprbrother.com",
+    "dependencies": {
+        "bulma": "^0.5.1",
+        "express": "^4.15.4",
+        "jquery": "^3.2.1",
+        "jquery-ui-dist": "^1.12.1",
+        "knockout": "^3.5.0",
+        "purecss": "^1.0.0",
+        "request": "^2.81.0"
+    },
+    "devDependencies": {
+        "electron": "^5.0.2",
+        "electron-builder": "^20.15.1"
+    },
+    "author": {
+        "name": "Yanc",
+        "email": "tech@aprbrother.com"
+    },
+    "license": "ISC",
+    "postinstall": "electron-builder install-app-deps",
+    "build": {
+        "appId": "v4.gateway.ab",
+        "win": {
+            "target": [
+                "nsis"
+            ],
+            "signingHashAlgorithms": [
+                "sha1",
+                "sha256"
+            ],
+            "publisherName": "Beijing April Brothers CO,.LTD"
+        },
+        "mac": {
+            "category": "public.app-category.developer-tools"
+        }
+    },
+    "scripts": {
+        "start": "electron .",
+        "pack": "electron-builder --dir ",
+        "dist:win": "electron-builder --win",
+        "dist:win32": "electron-builder --win --ia32",
+        "dist:osx": "electron-builder -mwl",
+        "dist:deb": "electron-builder --linux deb"
+    }
+}

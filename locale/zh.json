@@ -1,0 +1,19 @@
+{
+  "name": "四月兄弟蓝牙网关V2.0配置工具",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "app_title": "<h1>四月兄弟蓝牙网关配置工具</h1>",
+  "sta_conn_msg1": "本电脑现在连接的AP是:  ",
+  "sta_conn_msg2": "左侧菜单显示所有可以以STA方式连接的可配置蓝牙网关。",
+  "sta_conn_msg3": "在搜索iP区间是: ",
+  "sta_conn_msg": "本电脑现在连接的AP是: %s。左侧菜单显示所有可以以STA方式连接到AP: %s的可配置蓝牙网关。在搜索iP区间是: %s - %s",
+  "ap_conn_msg1": "本电脑现在连接的AP是:  ",
+  "ap_conn_msg2": "左侧显示所有可以以AP方式配置的可选蓝牙网关. <br>点击网关LOGO可以连接至此网关AP进行下一步配置。",
+  "ap_conn_msg": "本电脑现在连接的AP是: %s.左侧显示所有可以以AP方式配置的可选蓝牙网关. <br>点击网关LOGO可以连接至此网关AP进行下一步配置。",
+  "help": "Help",
+  "intro": "介绍",
+  "conn_ap": "AP模式",
+  "conn_sta": "STA模式",
+  "lang_changed": "语言配置已改，重启程序生效"
+}

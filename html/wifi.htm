@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="./html/asset/style.css">
+<style type="text/css">
+.pure-menu-item {
+width: 150px
+}
+.pure-menu-selected {
+background-color: lightgray
+}
+</style>
+
+</head>
+
+<body>
+<div id="main">
+    <div class="header">
+        <h2>Network</h2>
+    </div>
+
+    <div class="content">
+        <div class="pure-menu pure-menu-horizontal">
+            <ul class="pure-menu-list">
+                <li class="pure-menu-item" onclick="selectDashboard()">Dashboard</li>
+                <li class="pure-menu-item pure-menu-selected" onclick="selectWIFI()">Network</li>
+                <li class="pure-menu-item" onclick="selectApp()">Application</li>
+                <li class="pure-menu-item" onclick="selectAdvanced()">Advanced</li>
+            </ul>
+        </div>
+
+        <div>&nbsp;</div>
+        <form class="pure-form pure-form-aligned" action="/connection" id="f-conn" method="post">
+            <fieldset>
+                <legend>WiFi Station Setting</legend>
+
+                <div class="pure-control-group">
+                    <label for="wifi-type">Wireless Security</label>
+                    <select id="wifi-type" name="wifi-type">
+                        <option value="0">WPA-PSK/WPA2-PSK</option>
+                        <option value="1">WPA2 Enterprise</option>
+                    </select>
+                </div>
+
+                <div class="pure-control-group">
+                    <label for="ssid">Wi-Fi SSID</label>
+                    <input id="ssid" placeholder="Wi-Fi SSID" name="ssid">
+                </div>
+
+                <div id="wpa-group">
+                    <div class="pure-control-group" id="cont-pass">
+                        <label for="passcode">Security Key</label>
+                        <input id="passcode" placeholder="Security Key" name="passcode">
+                    </div>
+
+                    <div class="pure-control-group">
+                        <label for="open-wifi">Open Wi-Fi Network</label><input type="checkbox" id="open-wifi" name="open-wifi">
+                    </div>
+                </div>
+
+                <div id="eap-group">
+                    <div class="pure-control-group" id="cont-eap-identity">
+                        <label for="eap-indentity">Anonymouse Identity</label>
+                        <input id="eap-identity" placeholder="Anonymouse Identity" name="eap-identity">
+                        Support PEAP or TTLS method only
+                    </div>
+                    <div class="pure-control-group">
+                        <label for="eap-username">Username</label>
+                        <input id="eap-username" placeholder="Username" name="eap-username">
+                    </div>
+                    <div class="pure-control-group">
+                        <label for="eap-passcode">Password</label>
+                        <input id="eap-passcode" placeholder="Password" name="eap-passcode">
+                    </div>
+                </div>
+
+                <div>
+                    * WPA2 Enterprise is only available for firmware version &gt;= 1.2.0
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Ethernet Setting</legend>
+
+                <div class="pure-control-group">
+                    <label for="eth-dhcp">DHCP</label>
+                    <select id="eth-dhcp" name="eth-dhcp">
+                        <option value=1>Enable</option>
+                        <option value=0>Disable</option>
+                    </select>
+                </div>
+
+                <div id="eth-ip-group">
+                    <div class="pure-control-group">
+                        <label for="eth-ip">IP</label>
+                        <input id="eth-ip" placeholder="IP Address" name="eth-ip">
+                    </div>
+
+                    <div class="pure-control-group">
+                        <label for="eth-gateway">Gateway</label>
+                        <input id="eth-gateway" placeholder="Gateway" name="eth-gateway">
+                    </div>
+
+                    <div class="pure-control-group">
+                        <label for="eth-netmask">Netmask</label>
+                        <input id="eth-netmask" placeholder="Netmask" name="eth-netmask">
+                    </div>
+                <div>
+            </fieldset>
+
+            <div class="pure-controls">
+                <button id="btn-conn" type="button" class="pure-button pure-button-primary">Save</button>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+<script>
+function isValidSsid(str) { 
+    if (str.length == 0) {
+        return true;
+    }
+    return /^[\x20-\x7E]{1,32}$/.test(str); 
+}
+
+function isValidWpa(str) { 
+    return /^[\u0020-\u007e\u00a0-\u00ff]*$/.test(str); 
+}
+
+function doneCallback() {
+    $("#btn-conn").click(function() {
+        var len = $("#passcode").val().length;
+        if((len > 0) && (len  < 8)) {
+            alert("The passcode length for WiFi must greater than 7");
+            return false;
+        }
+
+        if (!isValidSsid($("#ssid").val())) {
+            alert("The SSID is not valid");
+            return false;
+        }
+
+        if (!isValidWpa($("#passcode").val())) {
+            alert("The passcode is not valid");
+            return false;
+        }
+
+        if (!isValidWpa($("#eap-passcode").val())) {
+            alert("The EAP password is not valid");
+            return false;
+        }
+
+        $.post("http://"+indexViewModel.curTreeNodeInfo.ip+"/connection", $("form#f-conn").serialize())
+            .done(function(data) {
+                $("#saveWifiMsg").dialog();
+            });
+    });
+
+    $("#ssids").change(function() {
+        $("#ssid").val(this.value);
+    });
+
+    $.getJSON("http://"+indexViewModel.curTreeNodeInfo.ip+"/connection", function(data) {
+        var apEnabled = 3;
+        var wifiType = typeof data["wifi-type"] == "undefined" ? 0 : data["wifi-type"];
+        $("#ssid").val(data.ssid);
+        $("#wifi-type").val(wifiType);
+        $("#eth-dhcp").val(data['eth-dhcp']);
+        $("#eth-ip").val(data['eth-ip']);
+        $("#eth-gateway").val(data['eth-gateway']);
+        $("#eth-netmask").val(data['eth-netmask']);
+        $("#eap-identity").val(data['eap-identity']);
+        $("#eap-username").val(data['eap-username']);
+        $("#eap-passcode").val(data['eap-passcode']);
+        $("#wifi-type").change();
+        $("#eth-dhcp").change();
+
+        if (!data.passcode.length) {
+            $("open-wifi").prop("checked", true);
+        }
+    });	
+    $("#f-conn")[0].action="http://"+indexViewModel.curTreeNodeInfo.ip+"/connection";
+}
+
+$("#open-wifi").change(function() {
+    if ($(this).is(":checked")) {
+        $("#passcode").prop("disabled", true);
+    } else {
+        $("#passcode").prop("disabled", false);
+    }
+});
+
+$("#wifi-type").change(function() {
+    if (this.value == 1) {
+        $("#eap-group").show();
+        $("#wpa-group").hide();
+    } else {
+        $("#eap-group").hide();
+        $("#wpa-group").show();
+    }
+});
+
+$("#eth-dhcp").change(function() {
+    if (this.value == 1) {
+        $('#eth-ip-group').hide();
+    } else {
+        $('#eth-ip-group').show();
+    }
+});
+
+if (window.jQuery) {
+    doneCallback();
+}
+</script>
+
+</body>
+</html>

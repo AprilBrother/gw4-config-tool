@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="./html/asset/style.css">
+<style type="text/css">
+    .pure-menu-item {
+        width: 150px
+    }
+    .pure-menu-selected {
+        background-color: lightgray
+    }
+</style>
+
+</head>
+
+<body>
+<div id="main">
+    <div class="header">
+        <h2>Dashboard</h2>
+    </div>
+
+    <div class="content">
+        <div class="pure-menu pure-menu-horizontal">
+            <ul class="pure-menu-list">
+                <li class="pure-menu-item pure-menu-selected" onclick="selectDashboard()">Dashboard</li>
+                <li class="pure-menu-item" onclick="selectWIFI()">Network</li>
+                <li class="pure-menu-item" onclick="selectApp()">Application</li>
+                <li class="pure-menu-item" onclick="selectAdvanced()">Advanced</li>
+            </ul>
+        </div>
+
+        <div>&nbsp;</div>
+        <div align="center">
+            <table class="pure-table" width="100%">
+				<tr class="pure-table-odd">
+					<td width="150">Firmware Version</td>
+					<td id="cont-ver"></td>
+				</tr>
+				<tr>
+					<td width="150">Hardware Version</td>
+					<td id="cont-hardware-ver"></td>
+				</tr>
+				<tr class="pure-table-odd">
+					<td>MAC</td>
+					<td id="cont-mac"></td>
+				</tr>
+				<tr>
+					<td>Serial Number</td>
+					<td id="cont-sn"></td>
+				</tr>
+				<tr class="pure-table-odd">
+					<td>IP Address</td>
+					<td id="cont-ip"></td>
+				</tr>
+            </table>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+function doneCallback() {
+    $.getJSON("http://"+indexViewModel.curTreeNodeInfo.ip+"/info", function(data) {
+        $("#popupMsg").dialog("close");
+        $("#cont-ver").text(data.firmwareVer);
+        $("#cont-hardware-ver").text(data.hardwareVer);
+        $("#cont-mac").text(data.mac);
+        $("#cont-sn").text(data.sn);
+        $("#cont-ip").text(indexViewModel.curTreeNodeInfo.ip);
+    })
+}
+
+function selectDashboard() {
+    $("#details").load("./html/index.htm")
+}
+
+function selectWIFI() {
+    console.log("select wifi")
+    $("#details").load("./html/wifi.htm")
+}
+
+function selectApp() {
+    $("#details").load("./html/app.htm")
+}
+
+function selectAdvanced() {
+    $("#details").load("./html/advanced.htm")
+}
+
+if (window.jQuery) {
+    doneCallback();
+}
+</script>
+</body>
+</html>

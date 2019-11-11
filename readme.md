@@ -1,5 +1,21 @@
-Config Tool For BLE Gateway4
+### How To Run ###
 
-### Documents ###
 
-* [ChangeLog](https://github.com/AprilBrother/gw4-config-tool/wiki/ChangeLog)
+* Install yarn 
+* Run command
+
+```
+yarn start
+```
+
+### How To Package ###
+
+* Install electron-builder
+```
+yarn global add electron-builder
+```
+* Build windows package
+```
+electron-builder -w
+```
+* build execute file at the `dist` directory

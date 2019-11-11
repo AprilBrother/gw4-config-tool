@@ -1,0 +1,15 @@
+{
+  "name": "util1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "app_title": "<h1>AB Gateway Configuration Tool</h1>",
+  "sta_conn_msg": "The local machine is currently connected to wifi AP: %s. Left pane is displaying all bluetooth gateways connected to wifi AP: %s in the range: %s - %s",
+  "ap_conn_msg1": "The local machine is currently connected to wifi AP: ",
+  "ap_conn_msg": "The local machine is currently connected to wifi AP: %s. Left pane is displaying all bluetooth gateways connected in AP mode.",
+  "help": "Help",
+  "intro": "Introduction",
+  "conn_ap": "Connect in AP mode",
+  "conn_sta": "Connect in STA mode",
+  "lang_changed": "Language has been changed, please restart."
+}

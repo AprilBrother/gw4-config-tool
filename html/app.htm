@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="./html/asset/style.css">
+<style type="text/css">
+.pure-menu-item {
+width: 150px
+}
+.pure-menu-selected {
+background-color: lightgray
+}
+</style>
+
+</head>
+
+<body>
+<div id="main">
+    <div class="header">
+        <h2>Configuration</h2>
+    </div>
+
+    <div class="content">
+        <div class="pure-menu pure-menu-horizontal">
+            <ul class="pure-menu-list">
+                <li class="pure-menu-item" onclick="selectDashboard()">Dashboard</li>
+                <li class="pure-menu-item" onclick="selectWIFI()">Network</li>
+                <li class="pure-menu-item pure-menu-selected" onclick="selectApp()">Application</li>
+                <li class="pure-menu-item" onclick="selectAdvanced()">Advanced</li>
+            </ul>
+        </div>
+
+        <div>&nbsp;</div>
+        <form class="pure-form pure-form-aligned" id="f-app" action="/config" method="post">
+
+            <div class="pure-control-group">
+                <label for="conn-type">Connection Type</label>
+                <select name="conn-type" id="conn-type">
+                    <option value="1">WebSocket Client</option>
+                    <option value="2">HTTP Client</option>
+                    <option value="3">MQTT Client</option>
+                </select>
+            </div>
+
+            <div id="cont-ws-client">
+                <div class="pure-control-group">
+                    <label for="ws-host">Host</label>
+                    <input id="ws-host" class="pure-input-1-2" name="ws-host" placeholder="Domain name or IP for server">
+                </div>
+
+                <div class="pure-control-group">
+                    <label for="ws-port">Port</label>
+                    <input id="ws-port" name="ws-port" type="number" min="80" max="65535">
+                    <span class="pure-form-message-inline">Port number, e.g., 8080</span>
+
+                </div>
+
+                <div class="pure-control-group">
+                    <label for="ws-url">URI</label>
+                    <input id="ws-url" name="ws-url" placeholder="/">
+                </div>
+            </div>
+
+            <div id="cont-http-client">
+                <div class="pure-control-group">
+                    <label for="http-host">Host</label>
+                    <input id="http-host" type="text" class="pure-input-1-2" name="http-host" placeholder="Domain name or IP for server">
+                </div>
+
+                <div class="pure-control-group">
+                    <label for="http-port">Port</label>
+                    <input id="http-port" name="http-port" type="number" min="80" max="65535">
+                    <span class="pure-form-message-inline">Port number, e.g., 8080</span>
+                </div>
+
+                <div class="pure-control-group">
+                    <label for="http-url">URI</label>
+                    <input id="http-url" class="pure-input-1-2" name="http-url" placeholder="URI, e.g, app.php?data=">
+                </div>
+            </div>
+
+            <div id="cont-mqtt-client">
+                <div class="pure-control-group">
+                    <label for="mqtt-host">Host</label>
+                    <input id="mqtt-host" class="pure-input-1-2" name="mqtt-host" placeholder="Domain name or IP for MQTT Broker">
+                </div>
+                <div class="pure-control-group">
+                    <label for="mqtt-port">Port</label>
+                    <input id="mqtt-port" name="mqtt-port" type="number" min="80" max="65535">
+                    <span class="pure-form-message-inline">Port number, e.g., 1883</span>
+                </div>
+                <div class="pure-control-group">
+                    <label for="mqtt-id-prefix">Client ID Prefix</label>
+                    <input id="mqtt-id-prefix" name="mqtt-id-prefix" placeholder="XBG_">
+                    <span class="pure-form-message-inline">ClientID=PREFIX+MAC_ADDRESS_GATEWAY</span>
+                </div>
+                <div class="pure-control-group">
+                    <label for="mqtt-topic">Publish Topic</label>
+                    <input id="mqtt-topic" name="mqtt-topic" placeholder="MQTT Topic">
+                </div>
+                <div class="pure-control-group">
+                    <label for="mqtt-username">Username (optional)</label>
+                    <input id="mqtt-username" name="mqtt-username" type="text">
+                </div>
+                <div class="pure-control-group">
+                    <label for="mqtt-password">Password (optional)</label>
+                    <input id="mqtt-password" name="mqtt-password" type="text">
+                </div>
+                <p>Note: "Client ID Prefix" is available for version &gt; v1.2.5.6</p>
+            </div>
+
+            <fieldset>
+            <legend>&nbsp;</legend>
+
+            <div class="pure-control-group">
+                <label for="req-int">Request Interval</label>
+                <input id="req-int" name="req-int" placeholder="1" value="1" type="number" max="10" min="1">
+                <span class="pure-form-message-inline">Seconds</span>
+            </div>
+
+            <div class="pure-control-group">
+                <label for="min-rssi">RSSI Filter</label>
+				<select id="min-rssi" name="min-rssi">
+					<option value="-127">Default</option>
+					<option value="-60">1 Meter</option>
+					<option value="-63">2 Meter</option>
+					<option value="-66">3 Meters</option>
+					<option value="-68">4 Meter</option>
+					<option value="-70">5 Meters</option>
+					<option value="-72">6 Meters</option>
+					<option value="-74">7 Meters</option>
+					<option value="-76">8 Meters</option>
+					<option value="-78">9 Meters</option>
+					<option value="-80">10 Meters</option>
+					<option value="-82">11 Meters</option>
+					<option value="-84">12 Meters</option>
+					<option value="-86">13 Meters</option>
+					<option value="-88">14 Meters</option>
+					<option value="-90">15 Meters</option>
+				</select>
+                <span class="pure-form-message-inline">This distance is a rough estimate</span>
+            </div>
+
+            <div class="pure-control-group">
+                <label for="scan-act">Scan Mode</label>
+				<select id="scan-act" name="scan-act">
+					<option value=0>Passive Scan</option>
+					<option value=1>Active Scan</option>
+				</select>
+            </div>
+
+            <div class="pure-control-group">
+                <label for="adv-filter">Advertising Filter</label>
+				<select id="adv-filter" name="adv-filter">
+					<option value="0">Allow All Advertising Data</option>
+					<option value="1">iBeacon Only</option>
+					<option value="2">Eddystone UID Only</option>
+					<option value="3">Eddystone URL Only</option>
+				</select>
+            </div>
+
+            <div class="pure-control-group" id="cont-uuid-filter">
+                <label for="filter-uuid">iBeacon UUID Whitelist</label>
+                <textarea class="pure-input-1-2" id="filter-uuid" name="filter-uuid"></textarea>
+                <span class="pure-form-message-inline">Max UUID number=4</span>
+            </div>
+
+            <div class="pure-control-group">
+                <label for="dup-filter">Duplicate Filter</label>
+				<select id="dup-filter" name="dup-filter">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</select>
+            </div>
+
+            <div class="pure-control-group" id="cont-auto-restart">
+                <label for="boot-period">Auto Restart</label>
+				<select id="boot-period" name="boot-period">
+					<option value="0">Disable</option>
+					<option value="1">1 Hour</option>
+					<option value="2">2 Hours</option>
+					<option value="3">3 Hours</option>
+					<option value="4">4 Hours</option>
+					<option value="5">5 Hours</option>
+					<option value="6">6 Hours</option>
+					<option value="7">7 Hours</option>
+					<option value="8">8 Hours</option>
+					<option value="9">9 Hours</option>
+					<option value="10">10 Hours</option>
+					<option value="11">11 Hours</option>
+					<option value="12">12 Hours</option>
+					<option value="13">13 Hours</option>
+					<option value="14">14 Hours</option>
+					<option value="15">15 Hours</option>
+					<option value="16">16 Hours</option>
+					<option value="17">17 Hours</option>
+					<option value="18">18 Hours</option>
+					<option value="19">19 Hours</option>
+					<option value="20">20 Hours</option>
+					<option value="21">21 Hours</option>
+					<option value="22">22 Hours</option>
+					<option value="23">23 Hours</option>
+					<option value="24">24 Hours</option>
+				</select>
+            </div>
+
+            </fieldset>
+
+            <div class="pure-controls">
+                <button type="button" class="pure-button pure-button-primary" id="btn-save-app">Save</button>
+                <button type="button" class="pure-button" id="btn-default">Save As Default</button>
+                <button type="button" class="pure-button" id="btn-clear">Clear Default</button>
+
+            </div>
+        </form>
+
+        <form class="pure-form pure-form-aligned" action="/filter_mac" enctype="multipart/form-data" method="post" id="f-filter-mac">
+            <fieldset>
+                <legend>&nbsp;</legend>
+                <div class="pure-control-group">
+                    <label for="min-rssi">MAC Address Filter</label>
+                    <textarea class="pure-input-1-2" name="mac" id="mac"></textarea>
+                </div>
+            </fieldset>
+
+            <div class="pure-controls">
+                <button type="button" class="pure-button pure-button-primary" id="btn-save-mac">Save MAC Filter</button>
+            </div>
+        </form>
+    </div>
+
+</div>
+<script src="html/asset/app.js"></script>
+</body>
+</html>

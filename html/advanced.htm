@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="./html/asset/style.css">
+<style type="text/css">
+.pure-menu-item {
+width: 150px
+}
+.pure-menu-selected {
+background-color: lightgray
+}
+</style>
+
+</head>
+
+<body>
+<div id="main">
+    <div class="header">
+        <h2>Advanced</h2>
+    </div>
+
+    <div class="content">
+        <div class="pure-menu pure-menu-horizontal">
+            <ul class="pure-menu-list">
+                <li class="pure-menu-item" onclick="selectDashboard()">Dashboard</li>
+                <li class="pure-menu-item" onclick="selectWIFI()">Network</li>
+                <li class="pure-menu-item" onclick="selectApp()">Application</li>
+                <li class="pure-menu-item pure-menu-selected" onclick="selectAdvanced()">Advanced</li>
+            </ul>
+        </div>
+        <div>&nbsp;</div>
+        <form class="pure-form pure-form-aligned" id="f-update" method="POST" action="/update" enctype="multipart/form-data">
+            <fieldset>
+            <div class="pure-control-group">
+                <label for="update-file">OTA Firmware Update</label>
+                <input type="button" class="pure-button pure-button-primary" value="Update" id="btn-update">
+                <input type="hidden" name="ota-update" value="1">
+                <button class="pure-button" type="button" id="btn-restart">Restart</button>
+            </div>
+            </fieldset>
+        </form>
+
+        <!--
+        <form class="pure-form pure-form-aligned" id="f-config" method="POST" action="/config" enctype="multipart/form-data">
+            <fieldset>
+            <div class="pure-control-group">
+                <label for="ota-url">OTA URL</label>
+                <input type="text" id="ota-url" name="ota-url">
+            </div>
+            <div class="pure-controls">
+                <input type="button" class="pure-button pure-button-primary" value="Update" id="btn-url">
+            </div>
+            </fieldset>
+        </form>
+        -->
+    </div>
+
+</div>
+
+<script>
+function doneCallback() {
+    $("#btn-restart").click(function() {
+        var data = {"restart": 1};
+        $.post("http://"+indexViewModel.curTreeNodeInfo.ip+"/restart", data);
+        alert("Restarted.");
+    });
+
+    $("#btn-url").click(function() {
+        $.post("http://"+indexViewModel.curTreeNodeInfo.ip+"/config", $("form#f-config").serialize())
+            .done(function(data) {
+                alert("Updated.");
+            });
+    });
+
+    $("#f-update")[0].action="http://"+indexViewModel.curTreeNodeInfo.ip+"/update";
+    $("#btn-update").click(function() {
+        $.post("http://"+indexViewModel.curTreeNodeInfo.ip+"/update", $("form#f-update").serialize())
+            .done(function(data) {
+                $("#popupMsg").html("<p>Updating firmware. Please wait a while...</p><div id=bar></div>");
+                $("#popupMsg").dialog();
+                $("#bar").progressbar({
+                  value: false
+                });
+                $("#bar").progressbar("option", "value", false);
+
+                var timeId = window.setInterval(function() {
+                    $.getJSON("http://" + indexViewModel.curTreeNodeInfo.ip + "/ota?t=" + (new Date().getTime()), function(data) {
+                        if (data.status == 1) {
+                            $("#bar").progressbar("option", "value", false);
+                        } else {
+                            $("#popupMsg").html("<p>Firmware is updated successful!</p>");
+                            window.clearInterval(timeId);
+                        }
+                    });
+                }, 3000);
+            });
+    });
+}
+
+if (window.jQuery) {
+    doneCallback();
+}
+</script>
+</body>
+</html>

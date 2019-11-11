@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<style type="text/css">
+.pure-menu-item {
+width: 150px
+}
+</style>
+
+</head>
+
+<body>
+<div id="main">
+
+
+    <a id="testGuide_en">
+        <h2>Testing guide</h2>
+        Testing mode can be used to verify whether the bluetooth gateway uploads data properly. Normally, the host above should be set to the ip address of a server. In the testing mode, this computer (on which this configuration tool is running) acts as the server to receive data from the AB gateway<br>
+        To set up testing,<br>
+        Set Connection Type to HTTP client <br>
+        Set Host to the ip address of this computer <br>
+        Set Port to 50080 <br>
+        Set URI to /app.php <br>
+        Enable in-bound data transfer on port 50080 of this computer in the firewall configuration. <br>
+        Click Save and Restart <br><br>
+    </a>
+    <a id="testGuide_zh">
+        <h2>测试指南</h2>
+测试功能是检查此台网关是否正常上传数据的功能。一般情况下上面的服务器Host框应当填写服务器地址。在此测试功能下，当前配置网关的这台电脑就临时充当服务器进行接收数据跟解码工作。<br>
+
+在测试状态下的配置是：<br>
+host为当前电脑的ip地址。<br>
+Connection Type为 HTTP Client<br>
+Port为50080<br>
+URI为 /app.php<br>
+在本机放火墙设置里打开端口50080<br>
+点击Save后此台网关将向本机发送数据。<br><br>
+    </a>
+    <a id="topic2_en">
+        <h2>Introduction</h2>
+        This is a tool for configuring the AB Bluetooth Gateway, it runs on a windows PC (config machine). The AB Bluetooth Gateway can be accessed in two modes, AP mode and STA mode.<br>
+        Out of box, only AP mode is turned on.<br>
+        To access in STA mode, first one uses a config machine to connect the AB Bluetooth Gateway in AP mode, then configure that AB Bluetooth Gateway to connect to some wifi AP (e.g. common_AP), then switch the config machine to connect to the same wifi AP which the AB Bluetooth Gateway is connecting. (e.g. common_AP)
+        Product information also can be see <br>
+http://wiki.aprbrother.com/wiki/AB_BLE_Gateway/en<br>
+And AB BLE Gateway Quick Start <br>
+http://wiki.aprbrother.com/wiki/AB_BLE_Gateway_Quick_Start/en<br>
+And data upload protocol information is here<br>
+http://wiki.aprbrother.com/wiki/AB_BLE_Gateway_User_Guide/en<br>
+    </a>
+    <a id="topic2_zh">
+        <h2>整体介绍</h2>
+        这是一个四月蓝牙网关V2.0版的产品的配置工具软件。这个软件运行在PC侧。<br>
+根据网关自身网络连接模式的不同可以分为，AP模式或者STA模式。<br>
+AP模式下。您的PC会连入此网关自建的AP热点。这样就可以在未知网络条件下，直接进行配置。<br>
+STA模式必须在此设备已经进行了基本联网设置 (能够接入本地局域网) 后进行后续配置。
+<br>
+
+二代网关产品信息<br>
+http://wiki.aprbrother.com/wiki/AB_BLE_Gateway/zh<br>
+二代网关协议信息<br>
+http://wiki.aprbrother.com/wiki/AB_BLE_Gateway_Quick_Start/zh<br>
+二代这里有上行协议的细节(可供三代网关参考)<br>
+http://wiki.aprbrother.com/wiki/AB_BLE_Gateway_User_Guide/zh<br>
+
+还有个QQ群(四月兄弟蓝牙网关群)可以加入提问题 群号：590461084
+
+
+    </a>
+    <a id="topic4_en">
+        <h2>Access in STA mode</h2>
+        When accessed in STA mode, the AB Bluetooth Gateway acts as a wifi client and connects to a specified nearby wifi AP, the config machine acts also as a wifi client and connects to the same wifi AP as the AB Bluetooth Gateway connects.<br><br>
+        To access in STA mode,<br>
+        first one uses a config machine to connect the AB Bluetooth Gateway in AP mode<br>
+        then configure that AB Bluetooth Gateway to connect to some wifi AP (e.g. common_AP)<br>
+        then switch the config machine to connect to the same wifi AP which the AB Bluetooth Gateway is connecting. (e.g. common_AP)<br>
+        Click <img src="./images/sta.png" style="width:32px"> in the left pane will list all AB Bluetooth Gateways connected to the same wifi AP as the config machine is connecting.
+    </a>
+    <a id="topic4_zh">
+        <h2>STA模式接入</h2>
+  所有的网关交付客户后首先客户需要进行AP模式的配置。当配置好此网关的上网Wifi(输入SSID和密码)以后。此网关可以连接局域网的Wifi。这样以后就可以不再使用AP模式对它进行配置。可以使用STA模式配置。 此时左侧列表显示的都是可以使用STA模式进行配置的当前局域网里的网关.
+    </a>
+
+</div>
+
+</body>
+</html>
