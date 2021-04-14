@@ -14,8 +14,8 @@ yarn start
 ```
 yarn global add electron-builder
 ```
-* Build windows package
+* 打包windows版本
 ```
 electron-builder -w
 ```
-* build execute file at the `dist` directory
+* 在dist目录下有安装包生成

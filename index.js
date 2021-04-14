@@ -1,44 +1,101 @@
-const {app, BrowserWindow} = require('electron')
-const path = require('path')
-const url = require('url')
-const chile_process=require('child_process');
-const fs=require('fs');
+const {
+    app, 
+    BrowserWindow, 
+    dialog,
+    ipcMain
+} = require('electron')
+const url = require('url'), 
+    path = require('path'),
+    chile_process=require('child_process'),
+    {autoUpdater} = require('electron-updater'),
+    fs=require('fs');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win
 
+var updateHandle = () => {
+    autoUpdater.on('error', error => {
+        dialog.showMessageBox({
+            message: "Check update error:" + error
+        });
+    });
+
+    autoUpdater.on('download-progress', function (progressObj) {
+        //win.webContents.send('downloadProgress', progressObj)
+    });
+
+    autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName, releaseDate, updateUrl, quitAndUpdate) =>{
+        dialog.showMessageBox({
+            type:    "question",
+            message: "New version is downloaded. Do you want to update now?",
+            defaultId: 0,
+            buttons: ["No", "Yes"]
+        }).then(res => {
+            if (res.response === 1) {
+                autoUpdater.quitAndInstall();
+            }
+        });
+    });
+
+    autoUpdater.on('update-not-available', info => {
+        dialog.showMessageBox({
+            message: "No update availble"
+        });
+    });
+
+    autoUpdater.on('update-available', info => {
+        dialog.showMessageBox({
+            message: "A newer version is available. Downloading..."
+        });
+    });
+
+    ipcMain.on('checkForUpdate', () => {
+        autoUpdater.checkForUpdates();
+    });
+}
+
 function createWindow () {
-  // Create the browser window.
-  win = new BrowserWindow({
-      width: 1920,
-      height: 1280,
-      webPreferences: {
-          nodeIntegration: true
-      }
-  });
-  win.maximize();
-  
-  var locale=app.getLocale();
-  
-  // and load the index.html of the app.
-  win.loadURL(url.format({
-    pathname: path.join(__dirname, 'index.html'),
-    search: "?locale="+locale,
-    protocol: 'file:',
-    slashes: true
-  }))
+    // Create the browser window.
+    win = new BrowserWindow({
+        width: 1920,
+        height: 1280,
+        webPreferences: {
+            nodeIntegration: true
+        }
+    });
+    win.setMenu(null);
+    win.maximize();
 
-  // Open the DevTools.
-  //win.webContents.openDevTools()
+    var locale=app.getLocale();
 
-  // Emitted when the window is closed.
-  win.on('closed', () => {
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
-    win = null
-  })
+    // and load the index.html of the app.
+    win.loadURL(url.format({
+        pathname: path.join(__dirname, 'index.html'),
+        search: "?locale="+locale,
+        protocol: 'file:',
+        slashes: true
+    }))
+
+    // Emitted when the window is closed.
+    win.on('closed', () => {
+        // Dereference the window object, usually you would store windows
+        // in an array if your app supports multi windows, this is the time
+        // when you should delete the corresponding element.
+        win = null
+    })
+    
+    updateHandle();
+
+    ipcMain.on('showAppVersion', () => {
+        var ver = app.getVersion();
+        dialog.showMessageBox({
+            message: `
+                Version: \t${ver}
+                Home Page: \thttps://aprbrother.com
+            `
+        });
+    });
 }
 
 // This method will be called when Electron has finished

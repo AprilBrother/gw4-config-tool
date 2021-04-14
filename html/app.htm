@@ -1,20 +1,3 @@
-<!doctype html>
-<html lang="en">
-<head>
-<link rel="stylesheet" href="./html/asset/style.css">
-<style type="text/css">
-.pure-menu-item {
-width: 150px
-}
-.pure-menu-selected {
-background-color: lightgray
-}
-</style>
-
-</head>
-
-<body>
-<div id="main">
     <div class="header">
         <h2>Configuration</h2>
     </div>
@@ -58,6 +41,15 @@ background-color: lightgray
                     <label for="ws-url">URI</label>
                     <input id="ws-url" name="ws-url" placeholder="/">
                 </div>
+
+                <div class="pure-control-group" id="cont-wss">
+                    <label for="wss">WSS</label>
+                    <select id="wss" name="wss">
+                        <option value="0">Disable</option>
+                        <option value="1">Enable</option>
+                    </select> 
+                    <button type="button" class="pure-button btn-cert">Setup Certificates</button>
+                </div>
             </div>
 
             <div id="cont-http-client">
@@ -76,6 +68,14 @@ background-color: lightgray
                     <label for="http-url">URI</label>
                     <input id="http-url" class="pure-input-1-2" name="http-url" placeholder="URI, e.g, app.php?data=">
                 </div>
+                <div class="pure-control-group" id="cont-https">
+                    <label for="https">HTTPS</label>
+                    <select id="https" name="https">
+                        <option value="0">Disable</option>
+                        <option value="1">Enable</option>
+                    </select> 
+                    <button type="button" class="pure-button btn-cert">Setup Certificates</button>
+                </div>
             </div>
 
             <div id="cont-mqtt-client">
@@ -91,11 +91,26 @@ background-color: lightgray
                 <div class="pure-control-group">
                     <label for="mqtt-id-prefix">Client ID Prefix</label>
                     <input id="mqtt-id-prefix" name="mqtt-id-prefix" placeholder="XBG_">
-                    <span class="pure-form-message-inline">ClientID=PREFIX+MAC_ADDRESS_GATEWAY</span>
+                    <span class="pure-form-message-inline">ClientID=PREFIX+MAC_GATEWAY</span>
                 </div>
                 <div class="pure-control-group">
                     <label for="mqtt-topic">Publish Topic</label>
                     <input id="mqtt-topic" name="mqtt-topic" placeholder="MQTT Topic">
+                </div>
+                <div class="pure-control-group" id="cont-qos">
+                    <label for="mqtt-qos">QoS</label>
+                    <select id="mqtt-qos" name="mqtt-qos">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                    </select>
+                </div>
+                <div class="pure-control-group" id="cont-retain">
+                    <label for="mqtt-retain">Retain</label>
+                    <select id="mqtt-retain" name="mqtt-retain">
+                        <option value="0">Disable</option>
+                        <option value="1">Enable</option>
+                    </select>
                 </div>
                 <div class="pure-control-group">
                     <label for="mqtt-username">Username (optional)</label>
@@ -105,7 +120,37 @@ background-color: lightgray
                     <label for="mqtt-password">Password (optional)</label>
                     <input id="mqtt-password" name="mqtt-password" type="text">
                 </div>
-                <p>Note: "Client ID Prefix" is available for version &gt; v1.2.5.6</p>
+                <div class="pure-control-group" id="cont-mqtts">
+                    <label for="mqtts">MQTTS</label>
+                    <select id="mqtts" name="mqtts">
+                        <option value="0">Disable</option>
+                        <option value="1">Enable</option>
+                    </select> 
+                    <button type="button" class="pure-button btn-cert">Setup Certificate</button>
+                </div>
+                <div id="cont-mqtt-config">
+                    <div class="pure-control-group">
+                        <label for="mqtt-config">Config by MQTT</label>
+                        <select id="mqtt-config" name="mqtt-config">
+                            <option value="0">Disable</option>
+                            <option value="1">Enable</option>
+                        </select> 
+                    </div>
+                    <div id="cont-cfg-topic">
+                        <div class="pure-control-group">
+                            <label for="cfg-topic">Config Topic</label>
+                            <input id="cfg-topic" name="cfg-topic" placeholder="Config Topic">
+                        </div>
+                        <div class="pure-control-group">
+                            <label for="one-cfg-topic">Topic Prefix For Device Inbox</label>
+                            <input id="one-cfg-topic" name="one-cfg-topic" placeholder="Topic Prefix For Device Inbox">
+                        </div>
+                        <div class="pure-control-group">
+                            <label for="one-pub-topic">Device Outbox Topic</label>
+                            <input id="one-pub-topic" name="one-pub-topic" placeholder="Device Outbox Topic">
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <fieldset>
@@ -113,30 +158,41 @@ background-color: lightgray
 
             <div class="pure-control-group">
                 <label for="req-int">Request Interval</label>
-                <input id="req-int" name="req-int" placeholder="1" value="1" type="number" max="10" min="1">
+                <input id="req-int" name="req-int" placeholder="1" value="1" type="number" max="1800" min="1">
                 <span class="pure-form-message-inline">Seconds</span>
+            </div>
+
+            <div class="pure-control-group" id="cont-req-format">
+                <label for="req-format">Request Format</label>
+				<select id="req-format" name="req-format">
+					<option value="0">MessagePack</option>
+					<option value="1">JSON</option>
+                </select>
+                <span class="pure-form-message-inline">JSON performance is much lower</span>
             </div>
 
             <div class="pure-control-group">
                 <label for="min-rssi">RSSI Filter</label>
-				<select id="min-rssi" name="min-rssi">
-					<option value="-127">Default</option>
-					<option value="-60">1 Meter</option>
-					<option value="-63">2 Meter</option>
-					<option value="-66">3 Meters</option>
-					<option value="-68">4 Meter</option>
-					<option value="-70">5 Meters</option>
-					<option value="-72">6 Meters</option>
-					<option value="-74">7 Meters</option>
-					<option value="-76">8 Meters</option>
-					<option value="-78">9 Meters</option>
-					<option value="-80">10 Meters</option>
-					<option value="-82">11 Meters</option>
-					<option value="-84">12 Meters</option>
-					<option value="-86">13 Meters</option>
-					<option value="-88">14 Meters</option>
-					<option value="-90">15 Meters</option>
-				</select>
+				<select id="sel-min-rssi" name="sel-min-rssi">
+                    <option value="-127">Default</option>
+                    <option value="-51">0.5 Meter</option>
+                    <option value="-60">1 Meter</option>
+                    <option value="-63">2 Meter</option>
+                    <option value="-66">3 Meters</option>
+                    <option value="-68">4 Meter</option>
+                    <option value="-70">5 Meters</option>
+                    <option value="-72">6 Meters</option>
+                    <option value="-74">7 Meters</option>
+                    <option value="-76">8 Meters</option>
+                    <option value="-78">9 Meters</option>
+                    <option value="-80">10 Meters</option>
+                    <option value="-82">11 Meters</option>
+                    <option value="-84">12 Meters</option>
+                    <option value="-86">13 Meters</option>
+                    <option value="-88">14 Meters</option>
+                    <option value="-90">15 Meters</option>
+                </select>
+                <input type="number" id="min-rssi" name="min-rssi" min="-127" max="-15" placeholder="RSSI"> dB
                 <span class="pure-form-message-inline">This distance is a rough estimate</span>
             </div>
 
@@ -155,7 +211,17 @@ background-color: lightgray
 					<option value="1">iBeacon Only</option>
 					<option value="2">Eddystone UID Only</option>
 					<option value="3">Eddystone URL Only</option>
+					<option value="11">iBeacon And Eddystone TLM Plain</option>
+					<option value="12">Eddystone UID And Eddystone TLM Plain</option>
+					<option value="13">Eddystone URL And Eddystone TLM Plain</option>
 				</select>
+            </div>
+
+            <div class="pure-control-group" id="cont-mfg-filter">
+                <label for="filter-mfg">Manufacturer ID Filter</label>
+                <input class="pure-input-1-5" id="mfg" type="text" maxlength="4" placeholder="Hexadecimal format">
+                <span class="pure-form-message-inline">Decimal</span>
+                <input class="pure-input-1-5" id="filter-mfg" name="filter-mfg" type="number" min="0" max="65535" readonly>
             </div>
 
             <div class="pure-control-group" id="cont-uuid-filter">
@@ -167,42 +233,32 @@ background-color: lightgray
             <div class="pure-control-group">
                 <label for="dup-filter">Duplicate Filter</label>
 				<select id="dup-filter" name="dup-filter">
+					<option value="0">Disable</option>
+					<option value="1">Enable</option>
+				</select>
+            </div>
+
+            </fieldset>
+
+            <fieldset id="cont-ntp">
+            <legend>Time Syncchronization</legend>
+            <div class="pure-control-group">
+                <label for="ntp-enabled">Enable NTP Client</label>
+				<select id="ntp-enabled" name="ntp-enabled">
 					<option value="0">No</option>
 					<option value="1">Yes</option>
 				</select>
             </div>
 
-            <div class="pure-control-group" id="cont-auto-restart">
-                <label for="boot-period">Auto Restart</label>
-				<select id="boot-period" name="boot-period">
-					<option value="0">Disable</option>
-					<option value="1">1 Hour</option>
-					<option value="2">2 Hours</option>
-					<option value="3">3 Hours</option>
-					<option value="4">4 Hours</option>
-					<option value="5">5 Hours</option>
-					<option value="6">6 Hours</option>
-					<option value="7">7 Hours</option>
-					<option value="8">8 Hours</option>
-					<option value="9">9 Hours</option>
-					<option value="10">10 Hours</option>
-					<option value="11">11 Hours</option>
-					<option value="12">12 Hours</option>
-					<option value="13">13 Hours</option>
-					<option value="14">14 Hours</option>
-					<option value="15">15 Hours</option>
-					<option value="16">16 Hours</option>
-					<option value="17">17 Hours</option>
-					<option value="18">18 Hours</option>
-					<option value="19">19 Hours</option>
-					<option value="20">20 Hours</option>
-					<option value="21">21 Hours</option>
-					<option value="22">22 Hours</option>
-					<option value="23">23 Hours</option>
-					<option value="24">24 Hours</option>
-				</select>
+            <div class="pure-control-group">
+                <label for="ntp1">NTP server 1</label>
+                <input id="ntp1" class="pure-input-1-2" name="ntp1" placeholder="Domain name for NTP server">
             </div>
 
+            <div class="pure-control-group">
+                <label for="ntp2">NTP server 2</label>
+                <input id="ntp2" class="pure-input-1-2" name="ntp2" placeholder="Domain name for NTP server">
+            </div>
             </fieldset>
 
             <div class="pure-controls">
@@ -228,7 +284,4 @@ background-color: lightgray
         </form>
     </div>
 
-</div>
-<script src="html/asset/app.js"></script>
-</body>
-</html>
+<script src="asset/js/app.js"></script>

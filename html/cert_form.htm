@@ -1,0 +1,37 @@
+<div class="pure-menu pure-menu-horizontal">
+    <ul class="pure-menu-list">
+        <li class="pure-menu-item pure-menu-selected">
+            <a href="#" class="pure-menu-link menu-ca-cert">Server Certificate</a>
+        </li>
+        <li class="pure-menu-item">
+            <a href="#" class="pure-menu-link menu-client-cert">Client Certificate</a>
+        </li>
+        <li class="pure-menu-item">
+            <a href="#" class="pure-menu-link menu-client-key">Client Key</a>
+        </li>
+    </ul>
+</div>
+<form method="post" id="f-cert" name="f-cert">
+    <p><textarea id="ca-cert" name="ca-cert" class="pure-u-1" placeholder="-----BEGIN CERTIFICATE-----
+-----END CERTIFICATE-----" rows="10"></textarea></p>
+    <div class="pure-controls">
+        <button type="button" class="pure-button pure-button-primary btn-save-cert">Save CA Certificate</button>
+        <button type="reset" class="pure-button">Clear</button>
+    </div>
+</form>
+<form method="post" id="f-client-cert" name="f-client-cert" class="hidden">
+    <p><textarea id="client-cert" name="client-cert" class="pure-u-1" placeholder="-----BEGIN CERTIFICATE-----
+-----END CERTIFICATE-----" rows="10"></textarea></p>
+    <div class="pure-controls">
+        <button type="button" class="pure-button pure-button-primary btn-save-client-cert">Save Client Certificate</button>
+        <button type="reset" class="pure-button">Clear</button>
+    </div>
+</form>
+<form method="post" id="f-client-key" name="f-client-key" class="hidden">
+    <p><textarea id="client-key" name="client-key" class="pure-u-1" placeholder="-----BEGIN PRIVATE KEY-----
+-----END PRIVATE KEY-----" rows="10"></textarea></p>
+    <div class="pure-controls">
+        <button type="button" class="pure-button pure-button-primary btn-save-client-key">Save Client Key</button>
+        <button type="reset" class="pure-button">Clear</button>
+    </div>
+</form>
