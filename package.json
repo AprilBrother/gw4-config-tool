@@ -38,8 +38,7 @@
         },
         "publish": [
             {
-                "provider": "github",
-                "private": true
+                "provider": "github"
             }
         ],
         "mac": {
