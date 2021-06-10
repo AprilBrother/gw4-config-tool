@@ -6,7 +6,6 @@ function doneCallback() {
             return true;
         }
         return true;
-        //return /^[\x20-\x7E]{1,32}$/.test(str); 
     }
 
     function isValidWpa(str) { 
@@ -62,6 +61,12 @@ function doneCallback() {
         $("#eap-passcode").val(data['eap-passcode']);
         $("#wifi-type").change();
         $("#eth-dhcp").change();
+
+        if (typeof data['modem-apn'] == "undefined") {
+            $('#cont-modem').hide();
+        } else {
+            $('#cont-modem').show();
+        }
 
         if (!data.passcode.length) {
             $("open-wifi").prop("checked", true);
