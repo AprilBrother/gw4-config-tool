@@ -66,6 +66,7 @@ function doneCallback() {
             $('#cont-modem').hide();
         } else {
             $('#cont-modem').show();
+            $('#modem-apn').val(data['modem-apn']);
         }
 
         if (!data.passcode.length) {
