@@ -67,6 +67,8 @@ function doneCallback() {
         } else {
             $('#cont-modem').show();
             $('#modem-apn').val(data['modem-apn']);
+            $('.cont-imei').text(data['modem-imei']);
+            $('.cont-iccid').text(data['modem-iccid']);
         }
 
         if (!data.passcode.length) {
