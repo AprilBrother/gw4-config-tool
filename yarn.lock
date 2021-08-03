@@ -1456,10 +1456,10 @@ pupa@^2.1.1:
   dependencies:
     escape-goat "^2.0.0"
 
-purecss@^2.0.3:
-  version "2.0.3"
-  resolved "https://registry.npm.taobao.org/purecss/download/purecss-2.0.3.tgz#ae6cd4a37b4a91658930c68098308f06d0737364"
-  integrity sha1-rmzUo3tKkWWJMMaAmDCPBtBzc2Q=
+purecss@^2.0.6:
+  version "2.0.6"
+  resolved "https://registry.nlark.com/purecss/download/purecss-2.0.6.tgz#01508f04da6f47752b593ae34616fdec102dfc75"
+  integrity sha1-AVCPBNpvR3UrWTrjRhb97BAt/HU=
 
 rc@^1.2.8:
   version "1.2.8"

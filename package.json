@@ -11,7 +11,7 @@
         "jsrender": "^1.0.8",
         "knockout": "^3.5.0",
         "node-fetch": "^2.6.1",
-        "purecss": "^2.0.3",
+        "purecss": "^2.0.6",
         "timeout-signal": "^1.1.0"
     },
     "devDependencies": {
