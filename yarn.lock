@@ -744,10 +744,10 @@ electron-updater@^4.3.5:
     lodash.isequal "^4.5.0"
     semver "^7.3.2"
 
-electron@^13.1.8:
-  version "13.1.9"
-  resolved "https://registry.nlark.com/electron/download/electron-13.1.9.tgz?cache=0&sync_timestamp=1628561960764&other_urls=https%3A%2F%2Fregistry.nlark.com%2Felectron%2Fdownload%2Felectron-13.1.9.tgz#668e2632b81e9fa21edfd32876282d3e2ff7fd76"
-  integrity sha1-Zo4mMrgen6Ie39ModigtPi/3/XY=
+electron@^14.0.1:
+  version "14.0.1"
+  resolved "https://registry.nlark.com/electron/download/electron-14.0.1.tgz#967da47895a77a9af8a7938e9266cd4a75ab24c4"
+  integrity sha1-ln2keJWnepr4p5OOkmbNSnWrJMQ=
   dependencies:
     "@electron/get" "^1.0.1"
     "@types/node" "^14.6.2"

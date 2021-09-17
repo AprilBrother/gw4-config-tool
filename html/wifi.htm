@@ -56,10 +56,6 @@
                         <input id="eap-passcode" placeholder="Password" name="eap-passcode">
                     </div>
                 </div>
-
-                <div>
-                    * WPA2 Enterprise is only available for firmware version &gt;= 1.2.0
-                </div>
             </fieldset>
             <fieldset>
                 <legend>Ethernet Setting</legend>
@@ -106,7 +102,7 @@
             </fieldset>
 
             <fieldset id="cont-modem">
-                <legend>MODEM setting (For 4G gateway only)</legend>
+                <legend>MODEM setting (Optional, for 4G gateway only)</legend>
                 <div>
                     <div class="pure-control-group">
                         <label>IMEI</label>
@@ -121,6 +117,14 @@
                     <div class="pure-control-group">
                         <label for="modem-apn">APN</label>
                         <input id="modem-apn" placeholder="APN" name="modem-apn" maxlength="63">
+                    </div>
+                    <div class="pure-control-group">
+                        <label for="modem-mcc">MCC</label>
+                        <input id="modem-mcc" placeholder="Mobile country code" name="modem-mcc" maxlength="5" type="number">
+                    </div>
+                    <div class="pure-control-group">
+                        <label for="modem-mnc">MNC</label>
+                        <input id="modem-mnc" placeholder="Mobile network code" name="modem-mnc" maxlength="3" type="number">
                     </div>
                 </div>
             </fieldset>

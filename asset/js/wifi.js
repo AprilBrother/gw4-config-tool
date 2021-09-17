@@ -59,6 +59,8 @@ function doneCallback() {
         $("#eap-identity").val(data['eap-identity']);
         $("#eap-username").val(data['eap-username']);
         $("#eap-passcode").val(data['eap-passcode']);
+        $("#modem-mcc").val(data['modem-mcc']);
+        $("#modem-mnc").val(data['modem-mnc']);
         $("#wifi-type").change();
         $("#eth-dhcp").change();
 

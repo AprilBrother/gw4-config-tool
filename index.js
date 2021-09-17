@@ -4,6 +4,7 @@ const {
     dialog,
     ipcMain
 } = require('electron')
+
 const url = require('url'), 
     path = require('path'),
     chile_process=require('child_process'),
@@ -61,7 +62,8 @@ function createWindow () {
         width: 1920,
         height: 1280,
         webPreferences: {
-            nodeIntegration: true
+            nodeIntegration: true,
+            contextIsolation: false
         }
     });
     win.setMenu(null);
