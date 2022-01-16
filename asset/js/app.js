@@ -25,6 +25,7 @@ function doneCallback() {
         'filter-uuid',
         'filter-mfg',
         'req-format',
+        'metadata',
         'ntp-enabled',
         'ntp1',
         'ntp2' 
