@@ -285,30 +285,46 @@ function doneCallback() {
         }
     });
 
-    $("#f-app")[0].action="http://"+indexViewModel.curTreeNodeInfo.ip+"/config";
-    $("#btn-save-app").click(function() {
+    var validateForm = () => {
         var connType = $('#conn-type').val();
         switch(connType) {
             case "1":
                 if (!$('#ws-url').val().length) {
                     alert("URI cannot be empty");
-                    return;
+                    return false;
                 }
-            break;
+                break;
 
             case "2":
                 if (!$('#http-url').val().length) {
                     alert("URI cannot be empty");
-                    return;
+                    return false;
                 }
-            break;
+                break;
 
             default:
-            break;
+                break;
         }
 
-        postDeviceApi("/config", $('#f-app').serialize())
-            .done(data => $("#saveWifiMsg").dialog());
+        var meta = $('#metadata').val()
+        if (meta.length) {
+            try {
+                JSON.parse(meta)
+            } catch (e) {
+                alert("Custom metadata is invalid");
+                return false;
+            }
+        }
+
+        return true
+    }
+
+    $("#f-app")[0].action="http://"+indexViewModel.curTreeNodeInfo.ip+"/config";
+    $("#btn-save-app").click(function() {
+        if (validateForm()) {
+            postDeviceApi("/config", $('#f-app').serialize())
+                .done(data => $("#saveWifiMsg").dialog());
+        }
     });
 
     var genRequestOption = dstUri => {
