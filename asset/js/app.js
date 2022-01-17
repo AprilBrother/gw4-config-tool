@@ -1,5 +1,6 @@
 function doneCallback() {
     let storage = window.localStorage;
+    var compat = require('./asset/js/compat')
     let configKeys = [
         'req-int', 
         'http-url', 
@@ -208,6 +209,7 @@ function doneCallback() {
         $('#conn-type').change();
         $('#adv-filter').change();
         $('#mqtt-config').change();
+        $('#req-format').change();
 
         $('#sel-min-rssi').val($('#min-rssi').val());
 
@@ -264,6 +266,14 @@ function doneCallback() {
             $(this).val(parseInt($(this).val()));
         }
     });
+
+    $('#req-format').change(function() {
+        if ($(this).val() == 0) {
+            $('#cont-metadata').hide()
+        } else if (compat.supports('metadata')) {
+            $('#cont-metadata').show()
+        }
+    })
 
     $('#ws-port, #http-port, #mqtt-port').change(function() {
         if ($(this).val() > 65535) {
