@@ -6,6 +6,8 @@ let supports = feature => {
     switch (feature) {
         case 'metadata':
             return v() > '1.5.2'
+        case 'work_period':
+            return v() > '1.5.5'
         default:
             return false
     }

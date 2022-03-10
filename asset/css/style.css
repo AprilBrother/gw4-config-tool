@@ -28,14 +28,14 @@ This is the parent `<div>` that contains the menu and the content area.
     left: 0;
     padding-left: 0;
 }
-    #layout.active #menu {
-        left: 150px;
-        width: 150px;
-    }
+#layout.active #menu {
+    left: 150px;
+    width: 150px;
+}
 
-    #layout.active .menu-link {
-        left: 150px;
-    }
+#layout.active .menu-link {
+    left: 150px;
+}
 /*
 The content `<div>` is where all your content goes.
 */
@@ -54,17 +54,19 @@ The content `<div>` is where all your content goes.
      padding: 2.5em 2em 0;
      border-bottom: 1px solid #eee;
  }
-    .header h1 {
-        margin: 0.2em 0;
-        font-size: 3em;
-        font-weight: 300;
-    }
-     .header h2 {
-        font-weight: 300;
-        color: #ccc;
-        padding: 0;
-        margin-top: 0;
-    }
+
+.header h1 {
+    margin: 0.2em 0;
+    font-size: 3em;
+    font-weight: 300;
+}
+
+.header h2 {
+    font-weight: 300;
+    color: #ccc;
+    padding: 0;
+    margin-top: 0;
+}
 
 .content-subhead {
     margin: 50px 0 20px 0;
@@ -295,6 +297,10 @@ div.content .pure-menu-item {
  
 div.content .pure-menu-selected {
     background-color: lightgray
+}
+
+div.content select {
+    padding: 0.2em 0.6em;
 }
 
 div.gw-filter, div.gw-more {

@@ -27,6 +27,7 @@ function doneCallback() {
         'filter-mfg',
         'req-format',
         'metadata',
+        'tz',
         'ntp-enabled',
         'ntp1',
         'ntp2' 
