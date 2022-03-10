@@ -1,6 +1,12 @@
 function doneCallback() {
     let storage = window.localStorage;
     var compat = require('./asset/js/compat')
+    var dayjs = require('dayjs')
+    var utc = require('dayjs/plugin/utc')
+    var timezone = require('dayjs/plugin/timezone')
+    dayjs.extend(utc)
+    dayjs.extend(timezone)
+
     let configKeys = [
         'req-int', 
         'http-url', 
@@ -221,6 +227,12 @@ function doneCallback() {
             $("#btn-default").text("Default");
             $("#btn-clear").show();
             defaultConfig = JSON.parse(defaultConfig);
+        }
+
+        if (compat.supports('work_period')) {
+            $('#cont-tz').show()
+        } else {
+            $('#cont-tz').hide()
         }
 
         $('#btn-default').click(function() {
