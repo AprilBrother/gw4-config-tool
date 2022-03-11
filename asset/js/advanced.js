@@ -1,11 +1,23 @@
 function doneCallback() {
     let configUri = '/config';
+    var zones = require('./asset/js/zones.json')
+    var compat = require('./asset/js/compat')
 
+    $('body').off('click', '#btn-restart');
     $("#btn-restart").click(function() {
         var data = {"restart": 1};
         $.post("http://"+indexViewModel.curTreeNodeInfo.ip+"/restart", data);
         alert("Restarted.");
     });
+
+    if (compat.supports('schedule')) {
+        Object.entries(zones).forEach(([key, value]) => {
+            $('#tz').append(`<option value="${value}|${key}">${key}</option>`);
+        })
+        $('#cont-tz').show()
+    } else {
+        $('#cont-tz').hide()
+    }
 
     $('#popupMsg').off('click', '.btn-branch');
     $('#popupMsg').on('click', '.btn-branch', () => {
