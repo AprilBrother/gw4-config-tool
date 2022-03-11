@@ -28,7 +28,8 @@
 				</select>
             </div>
             <div class="pure-control-group">
-                <label for="sch-begin">Begin time</label>
+                <label for="sch-begin-hour">Begin time</label>
+                <input type="hidden" id="sch-begin" name="sch-begin">
 				<select id="sch-begin-hour" name="sch-begin-hour">
 					<option>00</option>
 					<option>01</option>
@@ -117,6 +118,7 @@
             </div>
             <div class="pure-control-group">
                 <label for="sch-end">End time</label>
+                <input type="hidden" id="sch-end" name="sch-end">
 				<select id="sch-end-hour" name="sch-end-hour">
 					<option>00</option>
 					<option>01</option>
@@ -144,7 +146,7 @@
 					<option>23</option>
 				</select>
                 :
-				<select id="sch-begin-min" name="sch-begin-min">
+				<select id="sch-end-min" name="sch-end-min">
 					<option>00</option>
 					<option>01</option>
 					<option>02</option>

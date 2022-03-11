@@ -10,14 +10,39 @@ function doneCallback() {
         alert("Restarted.");
     });
 
+    var loadScheduleConfig = () => {
+        getDeviceApi("/config", "json").done(data => {
+            $('#tz').val(data['tz'])
+            $('#sch-type').val(data['sch-type'])
+            var schBegin = data['sch-begin'].split(':')
+            $('#sch-begin-hour').val(schBegin[0])
+            $('#sch-begin-min').val(schBegin[1])
+            var schEnd = data['sch-end'].split(':')
+            $('#sch-end-hour').val(schEnd[0])
+            $('#sch-end-min').val(schEnd[1])
+        })
+    };
+
     if (compat.supports('schedule')) {
         Object.entries(zones).forEach(([key, value]) => {
             $('#tz').append(`<option value="${value}|${key}">${key}</option>`);
         })
         $('#cont-tz').show()
+        loadScheduleConfig();
     } else {
         $('#cont-tz').hide()
     }
+
+    $('#body').off('click', '.btn-sch');
+    $("#btn-sch").click(() => {
+        $('#sch-begin').val($('#sch-begin-hour').val() + ':' + $('#sch-begin-min').val())
+        $('#sch-end').val($('#sch-end-hour').val() + ':' + $('#sch-end-min').val())
+        postDeviceApi(configUri, $("form#f-schedule").serialize())
+            .done(data => {
+                console.log(data);
+                alert("Schedule updated");
+            });
+    })
 
     $('#popupMsg').off('click', '.btn-branch');
     $('#popupMsg').on('click', '.btn-branch', () => {
