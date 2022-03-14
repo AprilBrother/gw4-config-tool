@@ -211,19 +211,6 @@
             </fieldset>
         </form>
 
-        <form class="pure-form pure-form-aligned" id="f-update" method="POST" action="/update" enctype="multipart/form-data">
-            <fieldset>
-            <legend>Device</legend>
-            <div class="pure-control-group">
-                <label for="update-file">Firmware update</label>
-                <input type="button" class="pure-button pure-button-primary" value="Update" id="btn-update">
-                <input type="hidden" name="ota-update" value="1">
-                <button class="pure-button" type="button" id="btn-restart">Restart</button>
-                <button class="pure-button" type="button" id="btn-testing">Testing Version</button></li>
-            </div>
-            </fieldset>
-        </form>
-
         <form class="pure-form pure-form-aligned" id="f-adv" method="POST" action="/config" enctype="multipart/form-data">
         <fieldset id="cont-web-api">
             <legend>Web API</legend>
@@ -249,6 +236,20 @@
             </div>
         </fieldset>
         </form>
+
+        <form class="pure-form pure-form-aligned" id="f-update" method="POST" action="/update" enctype="multipart/form-data">
+            <fieldset>
+            <legend>Device</legend>
+            <div class="pure-control-group">
+                <label for="update-file">Firmware update</label>
+                <input type="button" class="pure-button pure-button-primary" value="Update" id="btn-update">
+                <input type="hidden" name="ota-update" value="1">
+                <button class="pure-button" type="button" id="btn-restart">Restart</button>
+                <button class="pure-button" type="button" id="btn-testing">Testing Version</button></li>
+            </div>
+            </fieldset>
+        </form>
+
     </div>
 
 <script src="asset/js/advanced.js"></script>
