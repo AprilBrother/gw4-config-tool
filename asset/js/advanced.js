@@ -37,6 +37,12 @@ function doneCallback() {
     $("#btn-sch").click(() => {
         $('#sch-begin').val($('#sch-begin-hour').val() + ':' + $('#sch-begin-min').val())
         $('#sch-end').val($('#sch-end-hour').val() + ':' + $('#sch-end-min').val())
+
+        if ($('#sch-end').val() <= $('#sch-begin').val()) {
+            alert("End time must be greater than begin time");
+            return false;
+        }
+
         postDeviceApi(configUri, $("form#f-schedule").serialize())
             .done(data => {
                 console.log(data);
