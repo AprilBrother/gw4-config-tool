@@ -743,7 +743,7 @@ ejs@^3.1.6:
   dependencies:
     jake "^10.6.1"
 
-electron-builder@^22.14.3:
+electron-builder@^22.14.13:
   version "22.14.13"
   resolved "https://registry.npmmirror.com/electron-builder/-/electron-builder-22.14.13.tgz#fd40564685cf5422a8f8d667940af3d3776f4fb8"
   integrity sha512-3fgLxqF2TXVKiUPeg74O4V3l0l3j7ERLazo8sUbRkApw0+4iVAf2BJkHsHMaXiigsgCoEzK/F4/rB5rne/VAnw==
@@ -1550,10 +1550,10 @@ pupa@^2.1.1:
   dependencies:
     escape-goat "^2.0.0"
 
-purecss@^2.0.6:
-  version "2.0.6"
-  resolved "https://registry.nlark.com/purecss/download/purecss-2.0.6.tgz#01508f04da6f47752b593ae34616fdec102dfc75"
-  integrity sha1-AVCPBNpvR3UrWTrjRhb97BAt/HU=
+purecss@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.npmmirror.com/purecss/-/purecss-2.1.0.tgz#7d7eca2896e57a75cf7620ccf73aa42ded4ddc97"
+  integrity sha512-QIgWhat8QkHTXdejFJNwZuw0pZ7Mj0MHILHNz8sV6HZBfbWtHpW3b1+Q1D6W/9x4chFhaq9u4+Uk8YbwELzsXg==
 
 rc@^1.2.8:
   version "1.2.8"

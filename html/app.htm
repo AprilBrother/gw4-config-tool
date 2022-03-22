@@ -26,19 +26,19 @@
 
             <div id="cont-ws-client">
                 <div class="pure-control-group">
-                    <label for="ws-host">Host</label>
+                    <label for="ws-host">Host <span class="t-red">*</span></label>
                     <input id="ws-host" class="pure-input-1-2" name="ws-host" placeholder="Domain name or IP for server">
                 </div>
 
                 <div class="pure-control-group">
-                    <label for="ws-port">Port</label>
+                    <label for="ws-port">Port <span class="t-red">*</span></label>
                     <input id="ws-port" name="ws-port" type="number" min="80" max="65535">
                     <span class="pure-form-message-inline">Port number, e.g., 8080</span>
 
                 </div>
 
                 <div class="pure-control-group">
-                    <label for="ws-url">URI</label>
+                    <label for="ws-url">URI <span class="t-red">*</span></label>
                     <input id="ws-url" name="ws-url" placeholder="/">
                 </div>
 
@@ -54,18 +54,18 @@
 
             <div id="cont-http-client">
                 <div class="pure-control-group">
-                    <label for="http-host">Host</label>
+                    <label for="http-host">Host <span class="t-red">*</span></label>
                     <input id="http-host" type="text" class="pure-input-1-2" name="http-host" placeholder="Domain name or IP for server">
                 </div>
 
                 <div class="pure-control-group">
-                    <label for="http-port">Port</label>
+                    <label for="http-port">Port <span class="t-red">*</span></label>
                     <input id="http-port" name="http-port" type="number" min="80" max="65535">
                     <span class="pure-form-message-inline">Port number, e.g., 8080</span>
                 </div>
 
                 <div class="pure-control-group">
-                    <label for="http-url">URI</label>
+                    <label for="http-url">URI <span class="t-red">*</span></label>
                     <input id="http-url" class="pure-input-1-2" name="http-url" placeholder="URI, e.g, app.php?data=">
                 </div>
                 <div class="pure-control-group" id="cont-https">
@@ -80,21 +80,21 @@
 
             <div id="cont-mqtt-client">
                 <div class="pure-control-group">
-                    <label for="mqtt-host">Host</label>
+                    <label for="mqtt-host">Host <span class="t-red">*</span></label>
                     <input id="mqtt-host" class="pure-input-1-2" name="mqtt-host" placeholder="Domain name or IP for MQTT Broker">
                 </div>
                 <div class="pure-control-group">
-                    <label for="mqtt-port">Port</label>
+                    <label for="mqtt-port">Port <span class="t-red">*</span></label>
                     <input id="mqtt-port" name="mqtt-port" type="number" min="80" max="65535">
                     <span class="pure-form-message-inline">Port number, e.g., 1883</span>
                 </div>
                 <div class="pure-control-group">
-                    <label for="mqtt-id-prefix">Client ID Prefix</label>
+                    <label for="mqtt-id-prefix">Client ID Prefix <span class="t-red">*</span></label>
                     <input id="mqtt-id-prefix" name="mqtt-id-prefix" placeholder="XBG_">
                     <span class="pure-form-message-inline">ClientID=PREFIX+MAC_GATEWAY</span>
                 </div>
                 <div class="pure-control-group">
-                    <label for="mqtt-topic">Publish Topic</label>
+                    <label for="mqtt-topic">Publish Topic <span class="t-red">*</span></label>
                     <input id="mqtt-topic" name="mqtt-topic" placeholder="MQTT Topic">
                 </div>
                 <div class="pure-control-group" id="cont-qos">
@@ -157,7 +157,7 @@
             <legend>&nbsp;</legend>
 
             <div class="pure-control-group">
-                <label for="req-int">Request Interval</label>
+                <label for="req-int">Request Interval <span class="t-red">*</span></label>
                 <input id="req-int" name="req-int" placeholder="1" value="1" type="number" max="1800" min="1">
                 <span class="pure-form-message-inline">Seconds</span>
             </div>

@@ -307,3 +307,7 @@ div.gw-filter, div.gw-more {
     margin: 0.5em;
     display: none
 }
+
+span.t-red {
+    color: #f00;
+}

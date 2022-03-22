@@ -269,9 +269,14 @@ function doneCallback() {
     });
 
     $('#req-format').change(function() {
+        if (!compat.supports('metadata')) {
+            $('#cont-metadata').hide()
+            return
+        }
+
         if ($(this).val() == 0) {
             $('#cont-metadata').hide()
-        } else if (compat.supports('metadata')) {
+        } else {
             $('#cont-metadata').show()
         }
     })
