@@ -7,7 +7,7 @@ let supports = feature => {
         case 'metadata':
             return v() > '1.5.2'
         case 'schedule':
-            return v() > '1.5.5'
+            return v() >= '1.5.6'
         default:
             return false
     }
