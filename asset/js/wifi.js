@@ -1,5 +1,6 @@
 function doneCallback() {
     let storage = window.localStorage;
+    let compat = require('./asset/js/compat')
 
     function isValidSsid(str) { 
         if (str.length == 0) {
@@ -10,6 +11,10 @@ function doneCallback() {
 
     function isValidWpa(str) { 
         return /^[\u0020-\u007e\u00a0-\u00ff]*$/.test(str); 
+    }
+
+    if (!compat.supports('modem-auth')) {
+        $('#cont-modem-auth').hide()
     }
 
     $("#btn-conn").click(function() {
@@ -69,8 +74,18 @@ function doneCallback() {
         } else {
             $('#cont-modem').show();
             $('#modem-apn').val(data['modem-apn']);
-            $('.cont-imei').text(data['modem-imei']);
-            $('.cont-iccid').text(data['modem-iccid']);
+            if (data['modem-imei'].length) {
+                $('.cont-imei').text(data['modem-imei']);
+            }
+            if (data['modem-iccid'].length) {
+                $('.cont-iccid').text(data['modem-iccid']);
+            }
+        }
+
+        if (compat.supports('modem-auth')) {
+            $("#modem-user").val(data['modem-user']);
+            $("#modem-pass").val(data['modem-pass']);
+            $("#modem-auth").val(data['modem-auth']);
         }
 
         if (!data.passcode.length) {

@@ -15,7 +15,7 @@
         <div>&nbsp;</div>
         <form class="pure-form pure-form-aligned" action="/connection" id="f-conn" method="post">
             <fieldset>
-                <legend>WiFi Station Setting</legend>
+                <legend>WiFi Station</legend>
 
                 <div class="pure-control-group">
                     <label for="wifi-type">Wireless Security</label>
@@ -58,7 +58,7 @@
                 </div>
             </fieldset>
             <fieldset>
-                <legend>Ethernet Setting</legend>
+                <legend>Ethernet</legend>
 
                 <div class="pure-control-group">
                     <label for="eth-dhcp">DHCP</label>
@@ -102,15 +102,15 @@
             </fieldset>
 
             <fieldset id="cont-modem">
-                <legend>MODEM setting (Optional, for 4G gateway only)</legend>
+                <legend>Modem (Optional, for 4G gateway only)</legend>
                 <div>
                     <div class="pure-control-group">
                         <label>IMEI</label>
-                        <span class="cont-imei"></span> 
+                        <span class="cont-imei">Not available</span> 
                     </div>
                     <div class="pure-control-group">
                         <label>ICCID</label>
-                        <span class="cont-iccid"></span> 
+                        <span class="cont-iccid">Not available</span> 
                     </div>
                 </div>
                 <div>
@@ -118,13 +118,31 @@
                         <label for="modem-apn">APN</label>
                         <input id="modem-apn" placeholder="APN" name="modem-apn" maxlength="63">
                     </div>
+                    <div id="cont-modem-auth">
+                        <div class="pure-control-group">
+                            <label for="modem-user">User name</label>
+                            <input id="modem-user" placeholder="User name" name="modem-user" maxlength="32">
+                        </div>
+                        <div class="pure-control-group">
+                            <label for="modem-pass">Password</label>
+                            <input id="modem-pass" placeholder="Password" name="modem-pass" maxlength="32">
+                        </div>
+                        <div class="pure-control-group">
+                            <label for="modem-auth">Type of sign-in info</label>
+                            <select id="modem-auth" name="modem-auth">
+                                <option value="0">DEFAULT</option>
+                                <option value="1">PAP</option>
+                                <option value="2">CHAP</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="pure-control-group">
                         <label for="modem-mcc">MCC</label>
-                        <input id="modem-mcc" placeholder="Mobile country code" name="modem-mcc" maxlength="5" type="number">
+                        <input id="modem-mcc" placeholder="Mobile country code" name="modem-mcc" maxlength="5" type="number"> Optional
                     </div>
                     <div class="pure-control-group">
                         <label for="modem-mnc">MNC</label>
-                        <input id="modem-mnc" placeholder="Mobile network code" name="modem-mnc" maxlength="3" type="number">
+                        <input id="modem-mnc" placeholder="Mobile network code" name="modem-mnc" maxlength="3" type="number"> Optional
                     </div>
                 </div>
             </fieldset>
