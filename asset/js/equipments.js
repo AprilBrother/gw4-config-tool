@@ -7,7 +7,6 @@ const os=require('os');
 const path = require('path'), 
     timeoutSignal = require('timeout-signal'),
     fetch = require('node-fetch');
-const jsrender = require('jsrender');
 const {ipcRenderer} = require('electron');
 
 const storage = window.localStorage;
@@ -27,7 +26,6 @@ function clearDevices() {
 }
 
 var renderDeviceItem = (host, data) => {
-    var tpl = jsrender.templates('<li class="pure-menu-item"><a href="#" data-host="{{:host}}"  class="pure-menu-link gw-item">gateway-{{:mac}}</a></li>');
     if(data && 
         data.mac && 
         data.hardwareVer && 
@@ -35,10 +33,8 @@ var renderDeviceItem = (host, data) => {
         data.hardwareVer.startsWith("4."))
     {
         var suffix = data.mac.replace(/:/g, "");
-        var item = $(tpl.render({
-            'mac': suffix,
-            'host': host
-        }));
+        var item = `<li class="pure-menu-item"><a href="#" data-host="${host}" class="pure-menu-link gw-item">gateway-${suffix}</a></li>`;
+        console.log(item)
         $('.sel-gw').append(item);
         var filter = $('#gw-mac').val();
         if (filter.length) {
@@ -53,7 +49,7 @@ var renderDeviceItem = (host, data) => {
 };
 
 var fetchDeviceInfo = (end_addr) => {
-    var addr = "http://" + end_addr + "/info";
+    var addr = `http://${end_addr}/info`;
     fetch(addr, {signal: timeoutSignal(5000)})
         .then(res => res.json())
         .then(json => renderDeviceItem(end_addr, json))
