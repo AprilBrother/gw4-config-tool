@@ -17,6 +17,10 @@ function doneCallback() {
         $('#cont-modem-auth').hide()
     }
 
+    if (!compat.supports('ping')) {
+        $('#cont-ping').hide()
+    }
+
     $("#btn-conn").click(function() {
         var len = $("#passcode").val().length;
         if((len > 0) && (len  < 8)) {
@@ -86,6 +90,10 @@ function doneCallback() {
             $("#modem-user").val(data['modem-user']);
             $("#modem-pass").val(data['modem-pass']);
             $("#modem-auth").val(data['modem-auth']);
+        }
+
+        if (compat.supports('ping')) {
+            $('#ping').val(data['ping'])
         }
 
         if (!data.passcode.length) {

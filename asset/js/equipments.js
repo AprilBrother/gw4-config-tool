@@ -34,7 +34,6 @@ var renderDeviceItem = (host, data) => {
     {
         var suffix = data.mac.replace(/:/g, "");
         var item = `<li class="pure-menu-item"><a href="#" data-host="${host}" class="pure-menu-link gw-item">gateway-${suffix}</a></li>`;
-        console.log(item)
         $('.sel-gw').append(item);
         var filter = $('#gw-mac').val();
         if (filter.length) {
