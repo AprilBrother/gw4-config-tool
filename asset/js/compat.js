@@ -1,7 +1,7 @@
 const compareVersions = require('compare-versions')
 
 let v = () => {
-    return indexViewModel.curTreeNodeInfo.data.firmwareVer
+    return indexViewModel.curTreeNodeInfo.data.firmwareVer.replace('i', '')
 }
 
 let supports = feature => {
