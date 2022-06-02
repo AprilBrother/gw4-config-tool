@@ -219,8 +219,8 @@ jQuery(function( $ ) {
         $('div.gw-more').toggle(400);
     });
 
-    $('#gw-mac').change(() => {
-        var mac = $('#gw-mac').val();
+    $('#gw-mac').on('input', function() {
+        var mac = $(this).val();
         if (!mac.length) {
             $('ul.sel-gw li').show();
             return;

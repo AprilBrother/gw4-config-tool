@@ -4,11 +4,9 @@ const {
     dialog,
     ipcMain
 } = require('electron')
-
+const {autoUpdater} = require('electron-updater')
 const url = require('url'), 
-    path = require('path'),
-    chile_process = require('child_process'),
-    {autoUpdater} = require('electron-updater')
+    path = require('path')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
