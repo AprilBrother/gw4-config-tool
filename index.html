@@ -9,7 +9,6 @@
     <link rel="stylesheet" type="text/css" href="./node_modules/jquery-ui-dist/jquery-ui.min.css">
     <script>
     window.$ = window.jQuery = require('./node_modules/jquery/dist/jquery.js');
-    window.ko = require("knockout");
     require("./node_modules/jquery-ui-dist/jquery-ui.min.js");
     require("./asset/js/equipments.js");
     </script>
@@ -56,7 +55,7 @@
             <h2 class="content-subhead">How to start</h2>
             <p>To get started, click "Scan" to find gateways in your local network.</p>
         </div>
-        <div id="popupMsg" style="display:none" data-bind="text: popupMsg">popup</div>
+        <div id="popupMsg" style="display:none">popup</div>
         <div id="saveWifiMsg" style="display:none">Changes have been saved.</div>
     </div>
 

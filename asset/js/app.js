@@ -211,6 +211,8 @@ function doneCallback() {
         $('#adv-filter').change();
         $('#mqtt-config').change();
         $('#req-format').change();
+        $('#mqtt-id-prefix').trigger('input')
+        $('#one-cfg-topic').trigger('input')
 
         $('#sel-min-rssi').val($('#min-rssi').val());
 
@@ -399,6 +401,16 @@ function doneCallback() {
         $('#f-client-key').removeClass("hidden");
         $('#f-client-cert, #f-cert').hide();
     });
+
+    $('#mqtt-id-prefix').on('input', function() {
+        var mac = indexViewModel.curTreeNodeInfo.data.mac.replaceAll(':', '')
+        $('#cont-final-topic').text('ClientID=' + $(this).val() + mac)
+    })
+
+    $('#one-cfg-topic').on('input', function() {
+        var mac = indexViewModel.curTreeNodeInfo.data.mac.replaceAll(':', '')
+        $('#cont-one-topic').text($(this).val() + mac)
+    })
 
     $("#f-filter-mac")[0].action="http://"+nodeIp+"/filter_mac";
     $("#btn-save-mac").click(function() {

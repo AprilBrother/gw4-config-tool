@@ -1318,11 +1318,6 @@ keyv@^3.0.0:
   dependencies:
     json-buffer "3.0.0"
 
-knockout@^3.5.0:
-  version "3.5.1"
-  resolved "https://registry.npm.taobao.org/knockout/download/knockout-3.5.1.tgz#62c81e81843bea2008fd23c575edd9ca978e75cf"
-  integrity sha1-YsgegYQ76iAI/SPFde3ZypeOdc8=
-
 latest-version@^5.1.0:
   version "5.1.0"
   resolved "https://registry.npm.taobao.org/latest-version/download/latest-version-5.1.0.tgz#119dfe908fe38d15dfa43ecd13fa12ec8832face"

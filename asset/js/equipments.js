@@ -1,14 +1,12 @@
 /**
  * load gateways
  */
-const chile_process=require('child_process');
 const fs=require('fs');
 const os=require('os');
 const path = require('path'), 
     timeoutSignal = require('timeout-signal'),
     fetch = require('node-fetch');
 const {ipcRenderer} = require('electron');
-
 const storage = window.localStorage;
 
 window.KEY_DEFAULT_CONFIG = "__def_conf";
@@ -17,7 +15,6 @@ var localeText;
 
 function configApp(nodeInfo) {
     $('.splash-container').hide();
-	indexViewModel.templateToUse("details-template")
     $("#details").load("./html/index.htm")
 }
 
@@ -33,7 +30,7 @@ var renderDeviceItem = (host, data) => {
         data.hardwareVer.startsWith("4."))
     {
         var suffix = data.mac.replace(/:/g, "");
-        var item = `<li class="pure-menu-item"><a href="#" data-host="${host}" class="pure-menu-link gw-item">gateway-${suffix}</a></li>`;
+        var item = `<li class="pure-menu-item"><a href="#" data-host="${host}" class="pure-menu-link gw-item">Gateway-${suffix}</a></li>`;
         $('.sel-gw').append(item);
         var filter = $('#gw-mac').val();
         if (filter.length) {
@@ -127,10 +124,7 @@ function loadGateways(node) {
     });
 };
 
-window.indexViewModel = {
-    title: ko.observable(""),
-    templateToUse: ko.observable("details-template")
-};
+window.indexViewModel = {}
 
 var batchUpdate = () => {
     $('.btn-batch-update')
@@ -188,7 +182,6 @@ window.getDeviceApi = (uri, dataType) => {
 };
 
 jQuery(function( $ ) {
-    ko.applyBindings(indexViewModel);
     var params={};
     window.location.search.slice(1).split("&").forEach(function(e){
         v_k=e.split("=");

@@ -91,7 +91,7 @@
                 <div class="pure-control-group">
                     <label for="mqtt-id-prefix">Client ID Prefix <span class="t-red">*</span></label>
                     <input id="mqtt-id-prefix" name="mqtt-id-prefix" placeholder="XBG_">
-                    <span class="pure-form-message-inline">ClientID=PREFIX+MAC_GATEWAY</span>
+                    <span class="pure-form-message-inline" id="cont-final-topic"></span>
                 </div>
                 <div class="pure-control-group">
                     <label for="mqtt-topic">Publish Topic <span class="t-red">*</span></label>
@@ -145,6 +145,7 @@
                         <div class="pure-control-group">
                             <label for="one-cfg-topic">Topic Prefix For Device Inbox</label>
                             <input id="one-cfg-topic" name="one-cfg-topic" placeholder="Topic Prefix For Device Inbox">
+                            <span class="pure-form-message-inline" id="cont-one-topic"></span>
                         </div>
                         <div class="pure-control-group">
                             <label for="one-pub-topic">Device Outbox Topic</label>
