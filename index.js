@@ -90,8 +90,7 @@ function createWindow () {
         var ver = app.getVersion();
         dialog.showMessageBox({
             message: `
-                Version: \t${ver}
-                Home Page: \thttps://aprbrother.com
+                Version: ${ver}
             `
         });
     });
