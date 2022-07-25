@@ -1,18 +1,19 @@
 ### How To Run ###
 
-
-* Install yarn 
-* Run command
-
+* Install `pnpm` and libraries
 ```
-yarn start
+pnpm i
+```
+* Run command
+```
+pnpm start
 ```
 
 ### How To Package ###
 
 * Install electron-builder
 ```
-yarn global add electron-builder
+pnpm add -D electron-builder
 ```
 * 打包windows版本
 ```
