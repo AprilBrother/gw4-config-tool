@@ -2,7 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   compare-versions: ^4.1.3
-  electron: ^20.0.2
+  electron: ^20.1.2
   electron-builder: ^23.3.3
   electron-updater: ^5.0.1
   jquery: ^3.6.0
@@ -21,7 +21,7 @@ dependencies:
   timeout-signal: 1.1.0
 
 devDependencies:
-  electron: 20.0.2
+  electron: 20.1.2
   electron-builder: 23.3.3
 
 packages:
@@ -816,8 +816,8 @@ packages:
       - supports-color
     dev: false
 
-  /electron/20.0.2:
-    resolution: {integrity: sha512-Op4nxSyXH0tXjhvWC+WDn9EI0gep5etPccainxu1A4wes+ZFQBMCBXxibotanJfG+WNW4RaOv88NArwHIsSmPw==}
+  /electron/20.1.2:
+    resolution: {integrity: sha512-Yz2GAUqgXNr3+7vI+xL3qoCBUw4nVX+MeF/+HNL80y67ZrhMFUbJFirw7Tm6/Kx8r6TBPz0/D3aleeySWFUmzw==}
     engines: {node: '>= 10.17.0'}
     hasBin: true
     requiresBuild: true
