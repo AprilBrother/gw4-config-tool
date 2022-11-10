@@ -14,8 +14,8 @@
         "timeout-signal": "^1.1.0"
     },
     "devDependencies": {
-        "electron": "^20.1.2",
-        "electron-builder": "^23.3.3"
+        "electron": "^21.2.3",
+        "electron-builder": "^23.6.0"
     },
     "author": {
         "name": "Yanc",
