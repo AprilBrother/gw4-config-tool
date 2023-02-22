@@ -26,7 +26,6 @@ var renderDeviceItem = (host, data) => {
     if(data && 
         data.mac && 
         data.hardwareVer && 
-        data.hardwareVer && 
         data.hardwareVer.startsWith("4."))
     {
         var suffix = data.mac.replace(/:/g, "");
