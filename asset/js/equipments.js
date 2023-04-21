@@ -23,11 +23,7 @@ function clearDevices() {
 }
 
 var renderDeviceItem = (host, data) => {
-    if(data && 
-        data.mac && 
-        data.hardwareVer && 
-        data.hardwareVer.startsWith("4."))
-    {
+    if(data && data.mac && data.hardwareVer && data.hardwareVer.startsWith("4.")) {
         var suffix = data.mac.replace(/:/g, "");
         var item = `<li class="pure-menu-item"><a href="#" data-host="${host}" class="pure-menu-link gw-item">Gateway-${suffix}</a></li>`;
         $('.sel-gw').append(item);

@@ -112,6 +112,11 @@
                         <option value="1">Enable</option>
                     </select>
                 </div>
+                <div class="pure-control-group" id="cont-keepalive">
+                    <label for="mqtt-keepalive">Keepalive</label>
+                    <input id="mqtt-keepalive" name="mqtt-keepalive" placeholder="0" value="0" type="number" max="600" min="0">
+                    <span class="pure-form-message-inline">0 = Disable</span>
+                </div>
                 <div class="pure-control-group">
                     <label for="mqtt-username">Username (optional)</label>
                     <input id="mqtt-username" name="mqtt-username" type="text">

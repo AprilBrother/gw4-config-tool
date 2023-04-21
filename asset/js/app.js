@@ -15,6 +15,7 @@ function doneCallback() {
         'one-cfg-topic',
         'one-pub-topic',
         'mqtt-id-prefix',
+        'mqtt-keepalive',
         'mqtts',
         'https',
         'wss',
