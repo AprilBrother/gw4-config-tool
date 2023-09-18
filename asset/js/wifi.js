@@ -57,6 +57,7 @@ function doneCallback() {
         var apEnabled = 3;
         var wifiType = typeof data["wifi-type"] == "undefined" ? 0 : data["wifi-type"];
         $("#ssid").val(data.ssid);
+        $("#passcode").val(data.passcode);
         $("#wifi-type").val(wifiType);
         $("#eth-dhcp").val(data['eth-dhcp']);
         $("#eth-ip").val(data['eth-ip']);
