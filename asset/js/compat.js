@@ -20,7 +20,7 @@ let supports = feature => {
             ret = compareVersions(v(), '1.5.9')
         break
         case 'hb-int':
-            ret = compareVersions(v(), '1.5.15')
+            ret = compareVersions(v(), '1.5.16')
         break
         default:
         return false
