@@ -29,9 +29,6 @@
             "target": [
                 "nsis"
             ],
-            "signingHashAlgorithms": [
-                "sha256"
-            ],
             "artifactName": "${productName}-setup-${version}.${ext}",
             "publisherName": "Beijing April Brothers Ltd"
         },
