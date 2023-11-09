@@ -30,6 +30,7 @@ function doneCallback() {
         'req-format',
         'metadata',
         'ntp-enabled',
+        'hb-int',
         'ntp1',
         'ntp2' 
     ], formKeys = [ 
@@ -105,6 +106,11 @@ function doneCallback() {
             break;
         }
     });
+
+    if (!compat.supports('hb-int')) {
+        $('#cont-hb-int').hide()
+        return
+    }
 
     $('#ws-url').change(() => {
         $('#http-url').val($('#ws-url').val());

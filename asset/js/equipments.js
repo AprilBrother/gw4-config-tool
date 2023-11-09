@@ -11,8 +11,6 @@ const storage = window.localStorage;
 
 window.KEY_DEFAULT_CONFIG = "__def_conf";
 
-var localeText;
-
 function configApp(nodeInfo) {
     $('.splash-container').hide();
     $("#details").load("./html/index.htm")

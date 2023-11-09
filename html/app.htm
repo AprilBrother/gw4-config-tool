@@ -164,13 +164,13 @@
             <legend>&nbsp;</legend>
 
             <div class="pure-control-group">
-                <label for="req-int">Request Interval <span class="t-red">*</span></label>
+                <label for="req-int">Request interval <span class="t-red">*</span></label>
                 <input id="req-int" name="req-int" placeholder="1" value="1" type="number" max="1800" min="1">
                 <span class="pure-form-message-inline">Seconds</span>
             </div>
 
             <div class="pure-control-group" id="cont-req-format">
-                <label for="req-format">Request Format</label>
+                <label for="req-format">Request format</label>
 				<select id="req-format" name="req-format">
 					<option value="0">MessagePack</option>
 					<option value="1">JSON</option>
@@ -179,13 +179,13 @@
             </div>
 
             <div class="pure-control-group" id="cont-metadata">
-                <label for="metadata">Custom Metadata</label>
+                <label for="metadata">Custom metadata</label>
                 <textarea class="pure-input-1-2" id="metadata" name="metadata" maxlength="256" placeholder="JSON format"></textarea>
                 <span class="pure-form-message-inline">Max length=256</span>
             </div>
 
             <div class="pure-control-group">
-                <label for="min-rssi">RSSI Filter</label>
+                <label for="min-rssi">RSSI filter</label>
 				<select id="sel-min-rssi" name="sel-min-rssi">
                     <option value="-127">Default</option>
                     <option value="-51">0.5 Meter</option>
@@ -210,7 +210,7 @@
             </div>
 
             <div class="pure-control-group">
-                <label for="scan-act">Scan Mode</label>
+                <label for="scan-act">Scan mode</label>
 				<select id="scan-act" name="scan-act">
 					<option value=0>Passive Scan</option>
 					<option value=1>Active Scan</option>
@@ -218,7 +218,7 @@
             </div>
 
             <div class="pure-control-group">
-                <label for="adv-filter">Advertising Filter</label>
+                <label for="adv-filter">Advertising filter</label>
 				<select id="adv-filter" name="adv-filter">
 					<option value="0">Allow All Advertising Data</option>
 					<option value="1">iBeacon Only</option>
@@ -233,24 +233,30 @@
             </div>
 
             <div class="pure-control-group" id="cont-mfg-filter">
-                <label for="filter-mfg">Manufacturer ID Filter</label>
+                <label for="filter-mfg">Manufacturer ID filter</label>
                 <input class="pure-input-1-5" id="mfg" type="text" maxlength="4" placeholder="Hexadecimal format">
                 <span class="pure-form-message-inline">Decimal</span>
                 <input class="pure-input-1-5" id="filter-mfg" name="filter-mfg" type="number" min="0" max="65535" readonly>
             </div>
 
             <div class="pure-control-group" id="cont-uuid-filter">
-                <label for="filter-uuid">iBeacon UUID Whitelist</label>
+                <label for="filter-uuid">iBeacon UUID whitelist</label>
                 <textarea class="pure-input-1-2" id="filter-uuid" name="filter-uuid"></textarea>
                 <span class="pure-form-message-inline">Max UUID number=4</span>
             </div>
 
             <div class="pure-control-group">
-                <label for="dup-filter">Duplicate Filter</label>
+                <label for="dup-filter">Duplicate filter</label>
 				<select id="dup-filter" name="dup-filter">
 					<option value="0">Disable</option>
 					<option value="1">Enable</option>
 				</select>
+            </div>
+
+            <div class="pure-control-group" id="cont-hb-int">
+                <label for="hb-int">Heartbeat interval</label>
+                <input id="hb-int" name="hb-int" placeholder="30" value="30" type="number" max="120" min="0">
+                <span class="pure-form-message-inline">Seconds</span>
             </div>
 
             </fieldset>

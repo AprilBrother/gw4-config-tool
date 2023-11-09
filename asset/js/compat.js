@@ -5,19 +5,27 @@ let v = () => {
 }
 
 let supports = feature => {
+    let ret = false
     switch (feature) {
         case 'metadata':
-            return compareVersions(v(), '1.5.2')
+            ret = compareVersions(v(), '1.5.2')
+        break
         case 'schedule':
-            return compareVersions(v(), '1.5.6')
+            ret = compareVersions(v(), '1.5.6')
+        break
         case 'modem-auth':
-            return compareVersions(v(), '1.5.7')
+            ret = compareVersions(v(), '1.5.7')
+        break
         case 'ping':
-            return compareVersions(v(), '1.5.9')
+            ret = compareVersions(v(), '1.5.9')
+        break
+        case 'hb-int':
+            ret = compareVersions(v(), '1.5.15')
+        break
         default:
-            return false
+        return false
     }
-    return false
+    return ret >= 0 ? true : false
 }
 
 module.exports = {
