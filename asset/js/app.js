@@ -109,7 +109,6 @@ function doneCallback() {
 
     if (!compat.supports('hb-int')) {
         $('#cont-hb-int').hide()
-        return
     }
 
     $('#ws-url').change(() => {
@@ -160,6 +159,7 @@ function doneCallback() {
         url: "http://"+indexViewModel.curTreeNodeInfo.ip+"/config"
     };
     appendAuthHeader(opt);
+
     $.ajax(opt).done((data) => {
         var k;
         if (!data['http-url'].length) {
