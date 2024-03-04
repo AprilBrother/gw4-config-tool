@@ -174,6 +174,7 @@
 				<select id="req-format" name="req-format">
 					<option value="0">MessagePack</option>
 					<option value="1">JSON</option>
+					<option value="2">Compatible with Wireless iBeacon receiver</option>
                 </select>
                 <span class="pure-form-message-inline">JSON performance is much lower</span>
             </div>
@@ -225,11 +226,11 @@
 					<option value="2">Eddystone UID Only</option>
 					<option value="3">Eddystone URL Only</option>
                     <option value="4">Sensor mode, supports some Xiaomi sensor</option>
+                    <option value="5">Custom mode</option>
 					<option value="11">iBeacon And Eddystone TLM Plain</option>
 					<option value="12">Eddystone UID And Eddystone TLM Plain</option>
 					<option value="13">Eddystone URL And Eddystone TLM Plain</option>
 				</select>
-                Sensor mode is added for Firmware version &gt;= v1.5.0
             </div>
 
             <div class="pure-control-group" id="cont-mfg-filter">
@@ -243,6 +244,12 @@
                 <label for="filter-uuid">iBeacon UUID whitelist</label>
                 <textarea class="pure-input-1-2" id="filter-uuid" name="filter-uuid"></textarea>
                 <span class="pure-form-message-inline">Max UUID number=4</span>
+            </div>
+
+            <div class="pure-control-group" id="cont-custom-filter">
+                <label for="filter-cstm">Custom filter rule</label>
+                <input class="pure-input-1-2" id="filter-cstm" name="filter-cstm" />
+                <span class="pure-form-message-inline">E.g. 5-6=ab1f</span>
             </div>
 
             <div class="pure-control-group">

@@ -26,6 +26,7 @@ function doneCallback() {
         'adv-filter',
         'scan-act',
         'filter-uuid',
+        'filter-cstm',
         'filter-mfg',
         'req-format',
         'metadata',
@@ -127,6 +128,7 @@ function doneCallback() {
         switch(parseInt($('#adv-filter').val())) {
         case 0:
         $("#cont-uuid-filter").hide();
+        $("#cont-custom-filter").hide();
         $("#cont-mfg-filter").show();
         break;
 
@@ -134,11 +136,20 @@ function doneCallback() {
         case 1:
         case 11:
         $("#cont-mfg-filter").hide();
+        $("#cont-custom-filter").hide();
         $("#cont-uuid-filter").show();
+        break;
+
+        // custom filter
+        case 5:
+        $("#cont-mfg-filter").hide();
+        $("#cont-custom-filter").show();
+        $("#cont-uuid-filter").hide();
         break;
 
         default:
         $("#cont-uuid-filter").hide();
+        $("#cont-custom-filter").hide();
         $("#cont-mfg-filter").hide();
         }
     });
