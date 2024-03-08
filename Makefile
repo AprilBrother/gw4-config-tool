@@ -1,2 +1,2 @@
 archive:
-	git archive --format=zip --output=dist/gateway-config.zip HEAD
+	git archive --format=zip --output=dist/archive.zip HEAD
