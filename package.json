@@ -10,7 +10,7 @@
         "i18next": "^23.10.1",
         "jquery": "^3.6.0",
         "jquery-i18next": "^1.2.1",
-        "jquery-ui-dist": "^1.13.1",
+        "jquery-ui-dist": "^1.13.2",
         "node-fetch": "^2.6.7",
         "purecss": "^2.1.0",
         "timeout-signal": "^1.1.0"

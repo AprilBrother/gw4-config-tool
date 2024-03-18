@@ -311,3 +311,9 @@ div.gw-filter, div.gw-more {
 span.t-red {
     color: #f00;
 }
+
+.cont-fold {
+	background: -webkit-linear-gradient(top, #e5e5e5, #ccc);
+    display: none
+}
+

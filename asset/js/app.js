@@ -311,6 +311,12 @@ function doneCallback() {
         }
     });
 
+    $('.toggle-label').click(function() {
+        let icon = $('#icon-fold').html() == '▶' ? '▼' : '▶'
+        $('#icon-fold').html(icon)
+        $('div.cont-fold').toggle('fold')
+    })
+
     var validateForm = () => {
         var connType = $('#conn-type').val();
         switch(connType) {
