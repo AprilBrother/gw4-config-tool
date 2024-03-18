@@ -21,6 +21,8 @@ function doneCallback() {
         $('#cont-ping').hide()
     }
 
+    checkAuthData()
+
     $("#btn-conn").click(function() {
         var len = $("#passcode").val().length;
         if((len > 0) && (len  < 8)) {

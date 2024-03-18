@@ -141,7 +141,6 @@ var batchUpdate = () => {
 
 window.appendAuthHeader = (opt) => {
     if (typeof indexViewModel.curTreeNodeInfo.data.auth != "undefined") {
-        console.log("Found auth info");
         if (indexViewModel.curTreeNodeInfo.data.auth) {
             var user = storage.getItem('auth-username'),
                 pass = storage.getItem('auth-password');
@@ -173,6 +172,20 @@ window.getDeviceApi = (uri, dataType) => {
     appendAuthHeader(opt);
     return $.ajax(opt);
 };
+
+window.checkAuthData = function() {
+    if (typeof indexViewModel.curTreeNodeInfo.data.auth == "undefined") 
+        return
+
+    if (indexViewModel.curTreeNodeInfo.data.auth) {
+        var user = storage.getItem('auth-username'),
+            pass = storage.getItem('auth-password');
+
+        if (!user.length || !pass.length) {
+            alert('The gateway need username to get more information, please set Username and Password in the "More" menu')
+        }
+    }
+}
 
 jQuery(function( $ ) {
     var params={};
