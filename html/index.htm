@@ -1,4 +1,3 @@
-
 <div class="header">
     <h2>Dashboard</h2>
 </div>
@@ -36,9 +35,12 @@
                 <td>IP Address</td>
                 <td id="cont-ip"></td>
             </tr>
+            <tr>
+                <td>Basic auth</td>
+                <td id="cont-basic-auth"></td>
+            </tr>
         </table>
     </div>
-
 </div>
 
 
@@ -51,6 +53,12 @@ function doneCallback() {
         $("#cont-mac").text(data.mac);
         $("#cont-sn").text(data.sn);
         $("#cont-ip").text(indexViewModel.curTreeNodeInfo.ip);
+
+        let auth = 0
+        if (typeof indexViewModel.curTreeNodeInfo.data.auth != "undefined") {
+            auth = indexViewModel.curTreeNodeInfo.data.auth
+        }
+        $("#cont-basic-auth").text(auth ? 'Enabled' : 'Disabled');
         indexViewModel.curTreeNodeInfo.data = data;
     })
 }
@@ -74,4 +82,10 @@ function selectAdvanced() {
 if (window.jQuery) {
     doneCallback();
 }
+
+$('.auth-label').click(function() {
+    let icon = $('span.icon-fold').html() == '▶' ? '▼' : '▶'
+    $('span.icon-fold').html(icon)
+    $('div.cont-fold').toggle('fold')
+})
 </script>
