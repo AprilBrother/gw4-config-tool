@@ -55,7 +55,8 @@ function doneCallback() {
         $("#cont-ip").text(indexViewModel.curTreeNodeInfo.ip);
 
         let auth = 0
-        if (typeof indexViewModel.curTreeNodeInfo.data.auth != "undefined") {
+        let node = indexViewModel.curTreeNodeInfo
+        if (node.hasOwnProperty('data') && typeof node.data.auth != "undefined") {
             auth = indexViewModel.curTreeNodeInfo.data.auth
         }
         $("#cont-basic-auth").text(auth ? 'Enabled' : 'Disabled');
