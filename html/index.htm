@@ -54,13 +54,14 @@ function doneCallback() {
         $("#cont-sn").text(data.sn);
         $("#cont-ip").text(indexViewModel.curTreeNodeInfo.ip);
 
+        indexViewModel.curTreeNodeInfo.data = data;
+
         let auth = 0
         let node = indexViewModel.curTreeNodeInfo
-        if (node.hasOwnProperty('data') && typeof node.data.auth != "undefined") {
-            auth = indexViewModel.curTreeNodeInfo.data.auth
+        if (typeof node.data.auth != "undefined") {
+            auth = node.data.auth
         }
         $("#cont-basic-auth").text(auth ? 'Enabled' : 'Disabled');
-        indexViewModel.curTreeNodeInfo.data = data;
     })
 }
 
