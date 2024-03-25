@@ -47,7 +47,7 @@ function doneCallback() {
 
         postDeviceApi('/connection', $("form#f-conn").serialize())
             .done((data) => {
-                $("#saveWifiMsg").dialog();
+                showDialog('Network', 'Changes have been saved.')
             });
     });
 

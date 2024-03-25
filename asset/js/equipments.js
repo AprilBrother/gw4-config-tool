@@ -187,6 +187,15 @@ window.checkAuthData = function() {
     }
 }
 
+window.showDialog = function(title, htmlContent) {
+    let pop = $("#popupMsg")
+    pop.html(htmlContent)
+    pop.dialog({
+        title: title,
+        modal: true
+    })
+}
+
 jQuery(function( $ ) {
     var params={};
     window.location.search.slice(1).split("&").forEach(function(e){
@@ -249,11 +258,7 @@ jQuery(function( $ ) {
         var host = $(e.target).data('host');
         $('.sel-gw li').removeClass('pure-menu-selected');
         $(e.target).parent().addClass('pure-menu-selected');
-        $("#popupMsg").html("<p>Loading...</p><div id=bar></div>");
-        $("#popupMsg").dialog({
-            title: "Info",
-            modal: true
-        });
+        showDialog('Info', "<p>Loading...</p><div id=bar></div>")
         $("#bar").progressbar({
             value: false
         });
