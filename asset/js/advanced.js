@@ -129,7 +129,7 @@ function doneCallback() {
     $('#btn-adv').click(() => {
         postDeviceApi(configUri, $('form#f-adv').serialize())
             .done(data => {
-                console.log(data);
+                alert('Form submitted successfully.')
             });
     });
 
