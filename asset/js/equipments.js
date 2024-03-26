@@ -173,24 +173,71 @@ window.getDeviceApi = (uri, dataType) => {
     return $.ajax(opt);
 };
 
-window.checkAuthData = function() {
-    if (typeof indexViewModel.curTreeNodeInfo.data.auth == "undefined") 
-        return
+window.showLogin = function() {
+    let node = indexViewModel.curTreeNodeInfo.data
+    let mac = node.mac
+    let uKey = `cur-username@${mac}`
+    let pKey = `cur-password@${mac}`
 
-    if (indexViewModel.curTreeNodeInfo.data.auth) {
-        var user = storage.getItem('auth-username'),
-            pass = storage.getItem('auth-password');
+    showDialog("Authentication required", {
+        html: './html/auth_form.htm',
+        cb: function() {
+            let u = storage.getItem('auth-username'),
+                p = storage.getItem('auth-password')
 
-        if (!user.length || !pass.length) {
-            alert('The gateway need username to get more information, please set Username and Password in the "More" menu')
+            let ui = $('#cur-username')
+            let pi = $('#cur-password')
+            ui.val(u)
+            pi.val(p)
+            $("#f-auth").off('click', 'button.btn-auth')
+            $('#f-auth').on('click', 'button.btn-auth', function() {
+                storage.setItem(uKey, ui.val())
+                storage.setItem(pKey, pi.val())
+                $("#popupMsg").dialog("close")
+                alert('Authencatation data is ready. Go ahead')
+            })
         }
-    }
+    })
 }
 
-window.showDialog = function(title, htmlContent) {
+window.checkAuthData = function() {
+    if (typeof indexViewModel.curTreeNodeInfo.data.auth == "undefined") 
+        return true
+
+    if (indexViewModel.curTreeNodeInfo.data.auth) {
+        let node = indexViewModel.curTreeNodeInfo.data
+        let mac = node.mac
+        let uKey = `cur-username@${mac}`
+        let pKey = `cur-password@${mac}`
+        let user = storage.getItem(uKey),
+            pass = storage.getItem(pKey);
+
+        if ($.isEmptyObject(user) || $.isEmptyObject(pass)) {
+            showLogin()
+            return false
+        }
+    }
+
+    return true
+}
+
+window.showDialog = function(title, options) {
+    let settings = $.extend({
+        htmlContent: '',
+        html: '',
+        cb: null,
+    }, options);
+
     let pop = $("#popupMsg")
-    pop.html(htmlContent)
+    pop.html('')
+    if (settings.htmlContent.length) {
+        pop.html(settings.htmlContent)
+    } else if (settings.html.length) {
+        pop.load(settings.html, settings.cb)
+    }
+
     pop.dialog({
+        position: {my: 'center', at: 'center', of: $('div.content')},
         title: title,
         modal: true
     })
@@ -203,15 +250,8 @@ jQuery(function( $ ) {
         params[v_k[0]]=v_k[1];
     })
     var lang="en";
-    if(params.locale.startsWith("zh"))lang="zh";
     window.config={locale:lang};
-    fs.access(path.join(__dirname, 'config.json'),fs.R_OK,(err)=>{
-        if(!err) {
-            window.config=require(path.join(__dirname, 'config.json'));
-            lang=config.locale;
-        }
-        loadGateways();
-    });
+    loadGateways();
 
     $('#btn-logo').click(function() {
         ipcRenderer.send("showAppVersion");
@@ -258,7 +298,9 @@ jQuery(function( $ ) {
         var host = $(e.target).data('host');
         $('.sel-gw li').removeClass('pure-menu-selected');
         $(e.target).parent().addClass('pure-menu-selected');
-        showDialog('Info', "<p>Loading...</p><div id=bar></div>")
+        showDialog('Info', {
+            htmlContent: "<p>Loading...</p><div id=bar></div>"
+        })
         $("#bar").progressbar({
             value: false
         });

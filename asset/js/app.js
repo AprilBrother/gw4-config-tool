@@ -447,8 +447,6 @@ function doneCallback() {
             }
         });
     });
-
-    checkAuthData()
 }
 
 doneCallback();

@@ -13,7 +13,7 @@
     </div>
 
     <div>&nbsp;</div>
-    <div align="center">
+    <div align="center" id="cont-dashboard">
         <table class="pure-table" width="100%">
             <tr class="pure-table-odd">
                 <td width="150">Firmware Version</td>
@@ -61,7 +61,14 @@ function doneCallback() {
         if (typeof node.data.auth != "undefined") {
             auth = node.data.auth
         }
-        $("#cont-basic-auth").text(auth ? 'Enabled' : 'Disabled');
+        let text = auth ? 'Enabled' : 'Disabled'
+        let btn = `<button class="btn-login pure-button pure-button-primary">${text}</button>` 
+        $("#cont-basic-auth").html(btn);
+
+        $('#cont-dashboard').off('click', '.btn-login')
+        $('#cont-dashboard').on('click', '.btn-login', function() {
+            showLogin()
+        })
     })
 }
 
@@ -70,10 +77,14 @@ function selectDashboard() {
 }
 
 function selectWIFI() {
+    if (!checkAuthData())
+        return
     $("#details").load("./html/wifi.htm")
 }
 
 function selectApp() {
+    if (!checkAuthData())
+        return
     $("#details").load("./html/app.htm")
 }
 
@@ -82,7 +93,7 @@ function selectAdvanced() {
 }
 
 if (window.jQuery) {
-    doneCallback();
+    doneCallback()
 }
 
 $('.auth-label').click(function() {
