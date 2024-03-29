@@ -142,8 +142,11 @@ var batchUpdate = () => {
 window.appendAuthHeader = (opt) => {
     if (typeof indexViewModel.curTreeNodeInfo.data.auth != "undefined") {
         if (indexViewModel.curTreeNodeInfo.data.auth) {
-            var user = storage.getItem('auth-username'),
-                pass = storage.getItem('auth-password');
+            let mac = indexViewModel.curTreeNodeInfo.data.mac
+            let uKey = `cur-username@${mac}`
+            let pKey = `cur-password@${mac}`
+            var user = storage.getItem(uKey),
+                pass = storage.getItem(pKey);
 
             opt.headers = {
                 'Authorization': 'Basic ' + btoa(`${user}:${pass}`)
@@ -184,17 +187,26 @@ window.showLogin = function() {
         cb: function() {
             let u = storage.getItem('auth-username'),
                 p = storage.getItem('auth-password')
+            let curUser = storage.getItem(uKey),
+                curPass = storage.getItem(pKey)
 
             let ui = $('#cur-username')
             let pi = $('#cur-password')
-            ui.val(u)
-            pi.val(p)
+            if (!$.isEmptyObject(curUser)) {
+                ui.val(curUser)
+                pi.val(curPass)
+            } else {
+                ui.val(u)
+                pi.val(p)
+            }
+
             $("#f-auth").off('click', 'button.btn-auth')
             $('#f-auth').on('click', 'button.btn-auth', function() {
                 storage.setItem(uKey, ui.val())
                 storage.setItem(pKey, pi.val())
                 $("#popupMsg").dialog("close")
                 alert('Authencatation data is ready. Go ahead')
+                return false
             })
         }
     })
