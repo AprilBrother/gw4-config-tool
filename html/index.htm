@@ -61,8 +61,7 @@ function doneCallback() {
         if (typeof node.data.auth != "undefined") {
             auth = node.data.auth
         }
-        let text = auth ? 'Enabled' : 'Disabled'
-        let btn = `<button class="btn-login pure-button pure-button-primary">${text}</button>` 
+        let btn = auth ? `<button class="btn-login pure-button pure-button-primary">Enabled</button>` : 'Disabled'
         $("#cont-basic-auth").html(btn);
 
         $('#cont-dashboard').off('click', '.btn-login')
