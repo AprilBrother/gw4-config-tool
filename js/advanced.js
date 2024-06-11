@@ -1,7 +1,7 @@
 function doneCallback() {
     let configUri = '/config';
-    var zones = require('./asset/js/zones.json')
-    var compat = require('./asset/js/compat')
+    var zones = require('./js/zones.json')
+    var compat = require('./js/compat')
 
     $('body').off('click', '#btn-restart');
     $("#btn-restart").click(function() {

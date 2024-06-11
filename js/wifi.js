@@ -1,6 +1,6 @@
 function doneCallback() {
     let storage = window.localStorage;
-    let compat = require('./asset/js/compat')
+    let compat = require('./js/compat')
 
     function isValidSsid(str) { 
         if (str.length == 0) {

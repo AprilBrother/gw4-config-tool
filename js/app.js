@@ -1,6 +1,6 @@
 function doneCallback() {
     let storage = window.localStorage;
-    var compat = require('./asset/js/compat')
+    var compat = require('./js/compat')
 
     let configKeys = [
         'req-int', 
