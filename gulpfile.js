@@ -12,13 +12,5 @@ gulp.task('lib', function () {
   return gulp.src([
     'node_modules/purecss/build/pure-min.css'
   ]).pipe(gulp.dest('css'))
-
-    /*
-  return gulp.src([
-    'node_modules/marked/marked.min.js',
-    'node_modules/mermaid/dist/mermaid.min.js',
-    'node_modules/katex/dist/katex.min.js'
-  ]).pipe(gulp.dest('js'));
-  */
-});
+})
 
