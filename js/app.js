@@ -83,6 +83,29 @@ function doneCallback() {
         });
     }
 
+    function loadMacFilter() {
+        $.get(`http://${nodeIp}/filter_mac`, {s:new Date().getTime()}, function(filterData) {
+            var ks = filterData.split("\n"),
+                cnt = ks.length;
+
+            for (var i = 0; i < cnt; i++) {
+                ks[i] = $.trim(ks[i]);
+                if (ks[i].length != 12) {
+                    delete ks[i];
+                    continue;
+                }
+            }
+            var realData = ks.join("\n");
+            $("#mac").val(realData);
+
+            $('#mac').tagsInput({
+                placeholder: 'Add a mac',
+                delimiter: ['\n'],
+                unique: true
+            })
+        });
+    }
+
     hideAll();
     $("#btn-clear").hide();
     $("#conn-type").change(function() {
@@ -253,23 +276,7 @@ function doneCallback() {
             }
         });
 
-        setTimeout(function() {
-            $.get("http://"+nodeIp+"/filter_mac", {s:new Date().getTime()}, function(filterData)
-            {
-                var ks = filterData.split("\n"),
-                    cnt = ks.length;
-
-                for (var i = 0; i < cnt; i++) {
-                    ks[i] = $.trim(ks[i]);
-                    if (ks[i].length != 12) {
-                        delete ks[i];
-                        continue;
-                    }
-                }
-                var realData = ks.join("\n");
-                $("#mac").val(realData);
-            });
-        }, 200);
+        setTimeout(loadMacFilter, 200);
     });
 
     $('#btn-clear').click(function() {
@@ -436,11 +443,15 @@ function doneCallback() {
         $('#cont-one-topic').text($(this).val() + mac)
     })
 
-    $("#f-filter-mac")[0].action="http://"+nodeIp+"/filter_mac";
+    $("#f-filter-mac")[0].action= `http://${nodeIp}"/filter_mac`
     $("#btn-save-mac").click(function() {
+        let rawMac = $('#mac').val()
+        let finalMac = rawMac.replace(/:/g, '').toUpperCase()
+        $('#mac').val(finalMac)
+
         $.ajax({
             type: "POST",
-            url: "http://"+nodeIp+"/filter_mac",
+            url: `http://${nodeIp}/filter_mac`,
             data: $("form#f-filter-mac").serialize(),
             success: function(data) {
                 $("#saveWifiMsg").dialog();
