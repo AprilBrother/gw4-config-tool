@@ -22,6 +22,9 @@ let supports = feature => {
         case 'hb-int':
             ret = compareVersions(v(), '1.5.16')
         break
+        case 'gatt':
+            ret = compareVersions(v(), '2.0.0')
+        break
         default:
         return false
     }

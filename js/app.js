@@ -45,6 +45,8 @@ function doneCallback() {
     ];
 
     var nodeIp = indexViewModel.curTreeNodeInfo.ip;
+    var filterApi = compat.supports('gatt') ? 'filter_ble' : 'filter_mac'
+    filterApi = `http://${nodeIp}/${filterApi}`
 
     function hideAll() {
         $("#cont-ws-client").hide();
@@ -84,7 +86,8 @@ function doneCallback() {
     }
 
     function loadMacFilter() {
-        $.get(`http://${nodeIp}/filter_mac`, {s:new Date().getTime()}, function(filterData) {
+        // replace with ble_filter instead
+        $.get(filterApi, {s:new Date().getTime()}, function(filterData) {
             var ks = filterData.split("\n"),
                 cnt = ks.length;
 
@@ -103,6 +106,22 @@ function doneCallback() {
                 delimiter: ['\n'],
                 unique: true
             })
+
+            if (compat.supports('gatt')) {
+                $('.cont-services, .cont-chars').show()
+                $('#services').tagsInput({
+                    placeholder: 'Add a service UUID',
+                    delimiter: ['\n'],
+                    unique: true
+                })
+
+                $('#characteristics').tagsInput({
+                    placeholder: 'Add a characteristics UUID',
+                    delimiter: ['\n'],
+                    unique: true
+                })
+            }
+
         });
     }
 
@@ -443,7 +462,7 @@ function doneCallback() {
         $('#cont-one-topic').text($(this).val() + mac)
     })
 
-    $("#f-filter-mac")[0].action= `http://${nodeIp}"/filter_mac`
+    $("#f-filter-mac").attr('action', filterApi)
     $("#btn-save-mac").click(function() {
         let rawMac = $('#mac').val()
         let finalMac = rawMac.replace(/:/g, '').toUpperCase()
@@ -451,7 +470,7 @@ function doneCallback() {
 
         $.ajax({
             type: "POST",
-            url: `http://${nodeIp}/filter_mac`,
+            url: filterApi,
             data: $("form#f-filter-mac").serialize(),
             success: function(data) {
                 $("#saveWifiMsg").dialog();

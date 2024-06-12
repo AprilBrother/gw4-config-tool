@@ -303,7 +303,7 @@ div.content select {
     padding: 0.2em 0.6em;
 }
 
-div.gw-filter, div.gw-more {
+div.gw-filter, div.gw-more, div.cont-services, div.cont-chars {
     margin: 0.5em;
     display: none
 }
