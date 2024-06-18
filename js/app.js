@@ -85,29 +85,21 @@ function doneCallback() {
         });
     }
 
-    function loadMacFilter() {
+    function loadFilter() {
         // replace with ble_filter instead
         $.get(filterApi, {s:new Date().getTime()}, function(filterData) {
-            var ks = filterData.split("\n"),
-                cnt = ks.length;
-
-            for (var i = 0; i < cnt; i++) {
-                ks[i] = $.trim(ks[i]);
-                if (ks[i].length != 12) {
-                    delete ks[i];
-                    continue;
-                }
-            }
-            var realData = ks.join("\n");
-            $("#mac").val(realData);
-
-            $('#mac').tagsInput({
-                placeholder: 'Add a mac',
-                delimiter: ['\n'],
-                unique: true
-            })
-
             if (compat.supports('gatt')) {
+                let filters = JSON.parse(filterData)
+                if (typeof filters.mac != "undefined") {
+                    $("#mac").val(filters.mac);
+                }
+                if (typeof filters.svc != "undefined") {
+                    $("#services").val(filters.svc);
+                }
+                if (typeof filters.chr != "undefined") {
+                    $("#chars").val(filters.chr);
+                }
+
                 $('.cont-services, .cont-chars').show()
                 $('#services').tagsInput({
                     placeholder: 'Add a service UUID',
@@ -115,12 +107,31 @@ function doneCallback() {
                     unique: true
                 })
 
-                $('#characteristics').tagsInput({
+                $('#chars').tagsInput({
                     placeholder: 'Add a characteristics UUID',
                     delimiter: ['\n'],
                     unique: true
                 })
+            } else {
+                var ks = filterData.split("\n"),
+                    cnt = ks.length;
+
+                for (var i = 0; i < cnt; i++) {
+                    ks[i] = $.trim(ks[i]);
+                    if (ks[i].length != 12) {
+                        delete ks[i];
+                        continue;
+                    }
+                }
+                var realData = ks.join("\n");
+                $("#mac").val(realData);
             }
+
+            $('#mac').tagsInput({
+                placeholder: 'Add a mac',
+                delimiter: ['\n'],
+                unique: true
+            })
 
         });
     }
@@ -295,7 +306,7 @@ function doneCallback() {
             }
         });
 
-        setTimeout(loadMacFilter, 200);
+        setTimeout(loadFilter, 200);
     });
 
     $('#btn-clear').click(function() {
