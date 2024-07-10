@@ -33,6 +33,7 @@ function doneCallback() {
         'metadata',
         'ntp-enabled',
         'hb-int',
+        'loop-save',
         'ntp1',
         'ntp2' 
     ], formKeys = [ 
@@ -239,6 +240,10 @@ function doneCallback() {
 
         if (typeof data['scan-window'] != 'undefined') {
             $("#cont-scan-window").removeClass('hidden')
+        }
+
+        if (typeof data['loop-save'] != 'undefined') {
+            $("#cont-loop").removeClass('hidden')
         }
 
         for (var i = 0; i < configKeys.length; i++) {
