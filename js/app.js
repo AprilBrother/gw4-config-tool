@@ -25,6 +25,7 @@ function doneCallback() {
         'dup-filter', 
         'adv-filter',
         'scan-act',
+        'scan-window',
         'filter-uuid',
         'filter-cstm',
         'filter-mfg',
@@ -190,7 +191,7 @@ function doneCallback() {
     var opt = {
         dataType: "json",
         cache: false,
-        url: "http://"+indexViewModel.curTreeNodeInfo.ip+"/config"
+        url: `http://${nodeIp}/config`
     };
     appendAuthHeader(opt);
 
@@ -234,6 +235,10 @@ function doneCallback() {
 
         if (typeof data['mqtt-config'] == 'undefined') {
             $("#cont-mqtt-config").hide();
+        }
+
+        if (typeof data['scan-window'] != 'undefined') {
+            $("#cont-scan-window").removeClass('hidden')
         }
 
         for (var i = 0; i < configKeys.length; i++) {
@@ -443,7 +448,7 @@ function doneCallback() {
         $('#cont-one-topic').text($(this).val() + mac)
     })
 
-    $("#f-filter-mac")[0].action= `http://${nodeIp}"/filter_mac`
+    $("#f-filter-mac")[0].action= `http://${nodeIp}/filter_mac`
     $("#btn-save-mac").click(function() {
         let rawMac = $('#mac').val()
         let finalMac = rawMac.replace(/:/g, '').toUpperCase()
