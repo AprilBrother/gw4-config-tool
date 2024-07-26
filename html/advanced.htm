@@ -223,6 +223,15 @@
 
         <form class="pure-form pure-form-aligned" id="f-adv" method="POST" action="/config" enctype="multipart/form-data">
         <fieldset id="cont-web-api">
+            <legend>Downloads</legend>
+            <div class="pure-controls">
+                <button type="button" class="pure-button" id="btn-down">Download and cleanup offline record</button>
+                <button type="button" class="pure-button" id="btn-cleanup">Cleanup offline record</button>
+            </div>
+        </form>
+
+        <form class="pure-form pure-form-aligned" id="f-adv" method="POST" action="/config" enctype="multipart/form-data">
+        <fieldset id="cont-web-api">
             <legend>Web API</legend>
             <div class="pure-control-group">
                 <label for="update-file">Basic authentication</label>

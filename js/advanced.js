@@ -1,14 +1,116 @@
 function doneCallback() {
+    const META_LEN = 9
+    const OFFSET_RSSI = 7
+
+    const {ipcRenderer} = require('electron');
+
+    let fetch = require('node-fetch')
+    let fs = require('fs')
+    let slip = require('slip')
+
     let configUri = '/config';
+    let nodeIp = indexViewModel.curTreeNodeInfo.ip
     var zones = require('./js/zones.json')
     var compat = require('./js/compat')
 
     $('body').off('click', '#btn-restart');
     $("#btn-restart").click(function() {
         var data = {"restart": 1};
-        $.post("http://"+indexViewModel.curTreeNodeInfo.ip+"/restart", data);
+        $.post(`http://${nodeIp}/restart`, data);
         alert("Restarted.");
     });
+
+    function uint8to32(arr) {
+        if (arr.length !== 4) {
+            throw new Error('Input array must have exactly 4 elements');
+        }
+
+        return (arr[3] << 24) | (arr[2] << 16) | (arr[1] << 8) | arr[0];
+    }
+
+    function uint8tohex(arr) {
+        return Array.from(arr, byte => byte.toString(16).padStart(2, '0')).join('');
+    }
+
+    function parseLog() {
+        let filePath = 'log.txt'
+        let outPath = 'log.csv'
+        let mid, ts;
+
+        console.log("File downloaded", filePath)
+        function logMessage(msg) {
+            // Meta frame
+            if (msg.length == META_LEN) {
+                mid = uint8to32(msg.slice(1, 5))
+                ts = uint8to32(msg.slice(5))
+                return
+            }
+
+            let arr = []
+            arr.push(mid)
+            arr.push(ts)
+            let type = msg[0]
+            let mac = uint8tohex(msg.slice(1,7))
+            let rssi = msg[OFFSET_RSSI] - 256
+            let adv = uint8tohex(msg.slice(OFFSET_RSSI + 1))
+
+            arr.push(type)
+            arr.push(mac)
+            arr.push(rssi)
+            arr.push(adv)
+            //console.log(arr)
+
+            fs.appendFileSync(outPath, arr.join(',') + '\n')
+        }
+
+        try {
+            let thead = "ID,Time,AdvertingType,Mac,RSSI,AdvertisingData\n"
+            fs.writeFileSync(outPath, thead)
+            let data = fs.readFileSync(filePath)
+            console.log('len:', data.length, typeof data)
+            var decoder = new slip.Decoder({
+                onMessage: logMessage,
+                bufferSize: 2048
+            })
+            decoder.decode(data)
+            ipcRenderer.send("showDownload")
+        } catch (e) {
+            console.error(e)
+        }
+    }
+
+    $("#btn-down").click(function() {
+        console.log('down')
+        parseLog()
+        return
+        //TODO: add purge
+        try {
+            let filePath = 'log.txt'
+            //let response = await fetch(`http://${nodeIp}/log?purge=1`)
+            fetch(`http://${nodeIp}/log`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error ${response.status}`)
+                    }
+
+                    let writer = fs.createWriteStream(filePath)
+                    response.body.pipe(writer);
+                    
+                    writer.on('finish', parseLog)
+
+                    writer.on('error', function() {
+                        console.log("File download fail")
+                    })
+                })
+        } catch(e) {
+            console.log('Error downloading:', e)
+        }
+
+    })
+
+    $("#btn-cleanup").click(function() {
+        console.log('cleanup')
+    })
 
     var loadScheduleConfig = () => {
         getDeviceApi("/config", "json").done(data => {

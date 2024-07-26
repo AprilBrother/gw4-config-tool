@@ -5,12 +5,14 @@ const {
     ipcMain
 } = require('electron')
 const {autoUpdater} = require('electron-updater')
+let fs = require('fs')
 const url = require('url'), 
     path = require('path')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win
+let outPath = 'log.csv'
 
 var updateHandle = () => {
     autoUpdater.on('error', error => {
@@ -85,6 +87,18 @@ function createWindow () {
     })
     
     updateHandle();
+
+    ipcMain.on('showDownload', function() {
+        let savePath = dialog.showSaveDialogSync({
+            defaultPath: "adv.csv"
+        })
+
+        if (savePath) {
+            fs.rename(outPath, savePath, function(err) {
+                console.log("saved:", savePath)
+            })
+        }
+    })
 
     ipcMain.on('showAppVersion', () => {
         var ver = app.getVersion();
