@@ -308,6 +308,10 @@ div.gw-filter, div.gw-more {
     display: none
 }
 
+.hiden {
+    display: none
+}
+
 span.t-red {
     color: #f00;
 }

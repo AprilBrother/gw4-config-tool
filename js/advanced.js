@@ -81,13 +81,10 @@ function doneCallback() {
 
     $("#btn-down").click(function() {
         console.log('down')
-        parseLog()
-        return
-        //TODO: add purge
         try {
             let filePath = 'log.txt'
             //let response = await fetch(`http://${nodeIp}/log?purge=1`)
-            fetch(`http://${nodeIp}/log`)
+            fetch(`http://${nodeIp}/log?purge=1`)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error(`HTTP error ${response.status}`)
@@ -95,9 +92,7 @@ function doneCallback() {
 
                     let writer = fs.createWriteStream(filePath)
                     response.body.pipe(writer);
-                    
                     writer.on('finish', parseLog)
-
                     writer.on('error', function() {
                         console.log("File download fail")
                     })
@@ -109,7 +104,16 @@ function doneCallback() {
     })
 
     $("#btn-cleanup").click(function() {
+        // TODO: display message
         console.log('cleanup')
+        try {
+            fetch(`http://${nodeIp}/log`, {method: 'DELETE'})
+                .then(response => {
+                    console.log("resp:", response)
+                })
+        } catch(e) {
+            console.log('Error delete:', e)
+        }
     })
 
     var loadScheduleConfig = () => {
