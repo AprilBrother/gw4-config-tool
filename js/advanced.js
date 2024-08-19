@@ -68,18 +68,31 @@ function doneCallback() {
             fs.writeFileSync(outPath, thead)
             let data = fs.readFileSync(filePath)
             console.log('len:', data.length, typeof data)
+
             var decoder = new slip.Decoder({
                 onMessage: logMessage,
                 bufferSize: 2048
             })
             decoder.decode(data)
-            ipcRenderer.send("showDownload")
+
+            $("#popupMsg").dialog("close");
+            setTimeout(function() {
+                ipcRenderer.send("showDownload")
+            }, 500)
         } catch (e) {
             console.error(e)
         }
     }
 
     $("#btn-down").click(function() {
+        showDialog('Info', {
+            htmlContent: "<p>Loading...</p><div id=bar></div>"
+        })
+        $("#bar").progressbar({
+            value: false
+        });
+        $("#bar").progressbar("option", "value", false);
+
         console.log('down')
         try {
             let filePath = 'log.txt'
@@ -95,6 +108,7 @@ function doneCallback() {
                     writer.on('finish', parseLog)
                     writer.on('error', function() {
                         console.log("File download fail")
+                        alert("File download fail")
                     })
                 })
         } catch(e) {
@@ -104,12 +118,11 @@ function doneCallback() {
     })
 
     $("#btn-cleanup").click(function() {
-        // TODO: display message
         console.log('cleanup')
         try {
             fetch(`http://${nodeIp}/log`, {method: 'DELETE'})
                 .then(response => {
-                    console.log("resp:", response)
+                    alert("Done")
                 })
         } catch(e) {
             console.log('Error delete:', e)

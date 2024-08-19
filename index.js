@@ -93,6 +93,7 @@ function createWindow () {
             defaultPath: "adv.csv"
         })
 
+        console.log("savePath:", savePath)
         if (savePath) {
             fs.rename(outPath, savePath, function(err) {
                 console.log("saved:", savePath)
