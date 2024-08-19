@@ -102,7 +102,8 @@ function doneCallback() {
 
             $('#mac').tagsInput({
                 placeholder: 'Add a mac',
-                delimiter: ['\n'],
+                interactive: true,
+                delimiter: ['\n', ' '],
                 unique: true
             })
         });
