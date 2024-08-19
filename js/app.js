@@ -445,7 +445,11 @@ function doneCallback() {
 
     $('#mqtt-id-prefix').on('input', function() {
         var mac = indexViewModel.curTreeNodeInfo.data.mac.replaceAll(':', '')
-        $('#cont-final-topic').text('ClientID=' + $(this).val() + mac)
+        var finalId = $(this).val() + mac
+        if ($(this).val().endsWith('$$$')) {
+            finalId = $(this).val().slice(0, -3)
+        }
+        $('#cont-final-id').text('ClientID=' + finalId)
     })
 
     $('#one-cfg-topic').on('input', function() {
