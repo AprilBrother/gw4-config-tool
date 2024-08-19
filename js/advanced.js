@@ -152,6 +152,12 @@ function doneCallback() {
         $('#cont-tz').hide()
     }
 
+    if (compat.supports('local')) {
+        $('#cont-download').show()
+    } else {
+        $('#cont-download').hide()
+    }
+
     $('#body').off('click', '.btn-sch');
     $("#btn-sch").click(() => {
         $('#sch-begin').val($('#sch-begin-hour').val() + ':' + $('#sch-begin-min').val())
