@@ -103,13 +103,14 @@ function doneCallback() {
                 $('.cont-services, .cont-chars').show()
                 $('#services').tagsInput({
                     placeholder: 'Add a service UUID',
-                    delimiter: ['\n'],
+                    interactive: true,
+                    delimiter: ['\n', ' '],
                     unique: true
                 })
 
                 $('#chars').tagsInput({
                     placeholder: 'Add a characteristics UUID',
-                    delimiter: ['\n'],
+                    delimiter: ['\n', ' '],
                     unique: true
                 })
             } else {
@@ -129,7 +130,7 @@ function doneCallback() {
 
             $('#mac').tagsInput({
                 placeholder: 'Add a mac',
-                delimiter: ['\n'],
+                delimiter: ['\n', ' '],
                 unique: true
             })
 
