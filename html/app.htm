@@ -318,17 +318,28 @@
             </div>
         </form>
 
-        <form class="pure-form pure-form-aligned" action="/filter_mac" enctype="multipart/form-data" method="post" id="f-filter-mac">
+        <form class="pure-form pure-form-aligned" action="/filter_ble" enctype="multipart/form-data" method="post" id="f-filter-mac">
             <fieldset>
                 <legend>&nbsp;</legend>
                 <div class="pure-control-group">
-                    <label for="min-rssi">MAC Address Filter</label>
-                    <textarea class="pure-input-1-2 tagsinput" name="mac" id="mac"></textarea>
+                    <label for="mac">MAC address filter</label>
+                    <textarea class="tagsinput" name="mac" id="mac"></textarea>
                 </div>
+
+                <div class="pure-control-group cont-services">
+                    <label for="services">Service filter</label>
+                    <textarea class="tagsinput" name="services" id="services"></textarea>
+                </div>
+
+                <div class="pure-control-group cont-chars">
+                    <label for="chars">Characteristics filter</label>
+                    <textarea class="tagsinput" name="chars" id="chars"></textarea>
+                </div>
+
             </fieldset>
 
             <div class="pure-controls">
-                <button type="button" class="pure-button pure-button-primary" id="btn-save-mac">Save MAC filter</button>
+                <button type="button" class="pure-button pure-button-primary" id="btn-save-mac">Save filter</button>
             </div>
         </form>
     </div>

@@ -24,6 +24,8 @@ let supports = feature => {
         break
         case 'local':
             ret = compareVersions(v(), '1.8.0')
+        case 'gatt':
+            ret = compareVersions(v(), '2.0.0')
         break
         default:
         return false

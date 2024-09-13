@@ -47,6 +47,8 @@ function doneCallback() {
     ];
 
     var nodeIp = indexViewModel.curTreeNodeInfo.ip;
+    var filterApi = compat.supports('gatt') ? 'filter_ble' : 'filter_mac'
+    filterApi = `http://${nodeIp}/${filterApi}`
 
     function hideAll() {
         $("#cont-ws-client").hide();
@@ -85,20 +87,48 @@ function doneCallback() {
         });
     }
 
-    function loadMacFilter() {
-        $.get(`http://${nodeIp}/filter_mac`, {s:new Date().getTime()}, function(filterData) {
-            var ks = filterData.split("\n"),
-                cnt = ks.length;
-
-            for (var i = 0; i < cnt; i++) {
-                ks[i] = $.trim(ks[i]);
-                if (ks[i].length != 12) {
-                    delete ks[i];
-                    continue;
+    function loadFilter() {
+        // replace with ble_filter instead
+        $.get(filterApi, {s:new Date().getTime()}, function(filterData) {
+            if (compat.supports('gatt')) {
+                let filters = JSON.parse(filterData)
+                if (typeof filters.mac != "undefined") {
+                    $("#mac").val(filters.mac);
                 }
+                if (typeof filters.svc != "undefined") {
+                    $("#services").val(filters.svc);
+                }
+                if (typeof filters.chr != "undefined") {
+                    $("#chars").val(filters.chr);
+                }
+
+                $('.cont-services, .cont-chars').show()
+                $('#services').tagsInput({
+                    placeholder: 'Add a service UUID',
+                    interactive: true,
+                    delimiter: ['\n', ' '],
+                    unique: true
+                })
+
+                $('#chars').tagsInput({
+                    placeholder: 'Add a characteristics UUID',
+                    delimiter: ['\n', ' '],
+                    unique: true
+                })
+            } else {
+                var ks = filterData.split("\n"),
+                    cnt = ks.length;
+
+                for (var i = 0; i < cnt; i++) {
+                    ks[i] = $.trim(ks[i]);
+                    if (ks[i].length != 12) {
+                        delete ks[i];
+                        continue;
+                    }
+                }
+                var realData = ks.join("\n");
+                $("#mac").val(realData);
             }
-            var realData = ks.join("\n");
-            $("#mac").val(realData);
 
             $('#mac').tagsInput({
                 placeholder: 'Add a mac',
@@ -106,6 +136,7 @@ function doneCallback() {
                 delimiter: ['\n', ' '],
                 unique: true
             })
+
         });
     }
 
@@ -287,7 +318,7 @@ function doneCallback() {
             }
         });
 
-        setTimeout(loadMacFilter, 200);
+        setTimeout(loadFilter, 200);
     });
 
     $('#btn-clear').click(function() {
@@ -458,7 +489,8 @@ function doneCallback() {
         $('#cont-one-topic').text($(this).val() + mac)
     })
 
-    $("#f-filter-mac")[0].action= `http://${nodeIp}/filter_mac`
+    $("#f-filter-mac").attr('action', filterApi)
+    // TODO
     $("#btn-save-mac").click(function() {
         let rawMac = $('#mac').val()
         let finalMac = rawMac.replace(/:/g, '').toUpperCase()
@@ -466,7 +498,7 @@ function doneCallback() {
 
         $.ajax({
             type: "POST",
-            url: `http://${nodeIp}/filter_mac`,
+            url: filterApi,
             data: $("form#f-filter-mac").serialize(),
             success: function(data) {
                 $("#saveWifiMsg").dialog();
