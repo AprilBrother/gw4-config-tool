@@ -490,7 +490,6 @@ function doneCallback() {
     })
 
     $("#f-filter-mac").attr('action', filterApi)
-    // TODO
     $("#btn-save-mac").click(function() {
         let rawMac = $('#mac').val()
         let finalMac = rawMac.replace(/:/g, '').toUpperCase()
