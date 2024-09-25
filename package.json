@@ -6,7 +6,6 @@
     "homepage": "https://aprbrother.com",
     "dependencies": {
         "compare-versions": "^4.1.3",
-        "electron-updater": "^5.0.1",
         "i18next": "^23.10.1",
         "jquery": "^3.6.0",
         "jquery-i18next": "^1.2.1",

@@ -4,7 +4,6 @@ const {
     dialog,
     ipcMain
 } = require('electron')
-const {autoUpdater} = require('electron-updater')
 let fs = require('fs')
 const url = require('url'), 
     path = require('path')
@@ -13,47 +12,6 @@ const url = require('url'),
 // be closed automatically when the JavaScript object is garbage collected.
 let win
 let outPath = 'log.csv'
-
-var updateHandle = () => {
-    autoUpdater.on('error', error => {
-        dialog.showMessageBox({
-            message: "Check update error:" + error
-        });
-    });
-
-    autoUpdater.on('download-progress', function (progressObj) {
-        //win.webContents.send('downloadProgress', progressObj)
-    });
-
-    autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName, releaseDate, updateUrl, quitAndUpdate) =>{
-        dialog.showMessageBox({
-            type:    "question",
-            message: "New version is downloaded. Do you want to update now?",
-            defaultId: 0,
-            buttons: ["No", "Yes"]
-        }).then(res => {
-            if (res.response === 1) {
-                autoUpdater.quitAndInstall();
-            }
-        });
-    });
-
-    autoUpdater.on('update-not-available', info => {
-        dialog.showMessageBox({
-            message: "No update availble"
-        });
-    });
-
-    autoUpdater.on('update-available', info => {
-        dialog.showMessageBox({
-            message: "A newer version is available. Downloading..."
-        });
-    });
-
-    ipcMain.on('checkForUpdate', () => {
-        autoUpdater.checkForUpdates();
-    });
-}
 
 function createWindow () {
     // Create the browser window.
@@ -86,8 +44,6 @@ function createWindow () {
         win = null
     })
     
-    updateHandle();
-
     ipcMain.on('showDownload', function() {
         let savePath = dialog.showSaveDialogSync({
             defaultPath: "adv.csv"

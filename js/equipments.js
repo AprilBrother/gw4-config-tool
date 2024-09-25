@@ -327,11 +327,6 @@ jQuery(function( $ ) {
 
     $('.btn-batch-update').click(batchUpdate);
 
-    $('.btn-update-tool').click(() => {
-        console.log("update tool");
-        ipcRenderer.send("checkForUpdate");
-    });
-
     // read config 
     $('#auth-username').val(storage.getItem('auth-username'));
     $('#auth-password').val(storage.getItem('auth-password'));
