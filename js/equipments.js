@@ -326,6 +326,11 @@ jQuery(function( $ ) {
     });
 
     $('.btn-batch-update').click(batchUpdate);
+    $('.btn-setup-wifi').click(function() {
+        $('.splash-container').hide()
+        $("#details").load("./html/gw_console.htm")
+        return false;
+    });
 
     // read config 
     $('#auth-username').val(storage.getItem('auth-username'));

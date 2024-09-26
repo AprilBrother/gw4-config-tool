@@ -5,7 +5,7 @@ const {
     ipcMain
 } = require('electron')
 let fs = require('fs')
-const url = require('url'), 
+let url = require('url'), 
     path = require('path')
 
 // Keep a global reference of the window object, if you don't, the window will
