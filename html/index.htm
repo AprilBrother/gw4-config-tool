@@ -72,23 +72,23 @@ function doneCallback() {
 }
 
 function selectDashboard() {
-    $("#details").load("./html/index.htm")
+    $("#main").load("./html/index.htm")
 }
 
 function selectWIFI() {
     if (!checkAuthData())
         return
-    $("#details").load("./html/wifi.htm")
+    $("#main").load("./html/wifi.htm")
 }
 
 function selectApp() {
     if (!checkAuthData())
         return
-    $("#details").load("./html/app.htm")
+    $("#main").load("./html/app.htm")
 }
 
 function selectAdvanced() {
-    $("#details").load("./html/advanced.htm")
+    $("#main").load("./html/advanced.htm")
 }
 
 if (window.jQuery) {

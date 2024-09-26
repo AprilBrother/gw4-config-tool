@@ -12,7 +12,7 @@
             window.serialport.close()
         }
 
-        window.serialport = null
+        delete window.serialport
     }
 
     function searchCli(port) {

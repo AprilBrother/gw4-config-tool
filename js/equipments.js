@@ -1,8 +1,8 @@
 /**
  * load gateways
  */
-const fs=require('fs');
-const os=require('os');
+const fs = require('fs');
+const os = require('os');
 const path = require('path'), 
     timeoutSignal = require('timeout-signal'),
     fetch = require('node-fetch');
@@ -12,8 +12,7 @@ const storage = window.localStorage;
 window.KEY_DEFAULT_CONFIG = "__def_conf";
 
 function configApp(nodeInfo) {
-    $('.splash-container').hide();
-    $("#details").load("./html/index.htm")
+    $("#main").load("./html/index.htm")
 }
 
 function clearDevices() {
@@ -327,8 +326,7 @@ jQuery(function( $ ) {
 
     $('.btn-batch-update').click(batchUpdate);
     $('.btn-setup-wifi').click(function() {
-        $('.splash-container').hide()
-        $("#details").load("./html/gw_console.htm")
+        $("#main").load("./html/gw_console.htm")
         return false;
     });
 
