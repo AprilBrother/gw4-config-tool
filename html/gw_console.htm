@@ -4,9 +4,9 @@
 
 <div class="content">
     <div class="cont-console">
-        <h3>Note: Available for gateway only</h3>
+        <h3>Note: Available for gateway c3 only</h3>
         <fieldset>
-            <p>How to</p>
+            <legend>How to</legend>
             <ul>
             <li>Press the button three times and enter smartconfig mode</li>
             <li>Wait the LED fast blink</li>
@@ -14,11 +14,20 @@
             </ul>
         </fieldset>
         <p><button class="pure-button pure-u-1-1 btn-conn-dev">Connect gateway with cable</button></p>
+        <div id="console-bar" class="hiden"></div>
         <div class="cont-console hiden">
-            <form>
-                <input type="text" placeholder="SSID" id="serial-ssid">
-                <input type="password" placeholder="password for WiFi" id="serial-pw">
-                <button class="btn-submit-wifi">Submit</button>
+            <form class="pure-form pure-form-aligned">
+                <div class="pure-control-group">
+                    <label for="serial-ssid">SSID</label>
+                    <input type="text" placeholder="SSID" id="serial-ssid">
+                </div>
+                <div class="pure-control-group">
+                    <label for="serial-pw">Password for WiFi</label>
+                    <input type="password" placeholder="password for WiFi" id="serial-pw">
+                <div class="pure-control-group">
+                <div class="pure-controls">
+                    <button class="pure-button pure-button-primary btn-submit-wifi">Submit</button>
+                </div>
             </form>
         </div>
     </div>
