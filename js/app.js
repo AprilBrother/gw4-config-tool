@@ -47,8 +47,12 @@ function doneCallback() {
     ];
 
     var nodeIp = indexViewModel.curTreeNodeInfo.ip;
-    var filterApi = compat.supports('gatt') ? 'filter_ble' : 'filter_mac'
-    filterApi = `http://${nodeIp}/${filterApi}`
+    var filterUri = 'filter_mac'
+    if (compat.supports('gatt')) {
+        filterUri = 'filter_ble'
+        $("#conn-type option[value=1]").remove();
+    }
+    filterApi = `http://${nodeIp}/${filterUri}`
 
     function hideAll() {
         $("#cont-ws-client").hide();
