@@ -173,6 +173,11 @@ function doneCallback() {
         $('#cont-hb-int').hide()
     }
 
+    if (compat.supports('phy')) {
+        console.log("phy support:", compat.supports('phy'))
+        // TODO
+    }
+
     $('#ws-url').change(() => {
         $('#http-url').val($('#ws-url').val());
     });

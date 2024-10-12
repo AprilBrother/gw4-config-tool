@@ -4,28 +4,35 @@ let v = () => {
     return indexViewModel.curTreeNodeInfo.data.firmwareVer.replace('i', '')
 }
 
+function versionBetween(ver, v1, v2) {
+    return ((compareVersions(ver, v1) >= 0) && (compareVersions(ver, v2) < 0)) 
+}
+
 let supports = feature => {
     let ret = false
+    let ver = v()
     switch (feature) {
         case 'metadata':
-            ret = compareVersions(v(), '1.5.2')
+            ret = compareVersions(ver, '1.5.2')
         break
         case 'schedule':
-            ret = compareVersions(v(), '1.5.6')
+            ret = compareVersions(ver, '1.5.6')
         break
         case 'modem-auth':
-            ret = compareVersions(v(), '1.5.7')
+            ret = compareVersions(ver, '1.5.7')
         break
         case 'ping':
-            ret = compareVersions(v(), '1.5.9')
+            ret = compareVersions(ver, '1.5.9')
         break
         case 'hb-int':
-            ret = compareVersions(v(), '1.5.16')
+            ret = compareVersions(ver, '1.5.16')
         break
+        case 'phy':
+            return versionBetween(ver, '1.7.0', '1.8.0')
         case 'local':
-            ret = compareVersions(v(), '1.8.0')
+            return versionBetween(ver, '1.8.0', '1.9.0')
         case 'gatt':
-            ret = compareVersions(v(), '2.0.0')
+            ret = compareVersions(ver, '2.0.0')
         break
         default:
         return false
