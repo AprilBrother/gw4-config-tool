@@ -316,8 +316,16 @@ span.t-red {
     color: #f00;
 }
 
+.cont-toggle {
+    padding: 8px 0 8px 1em;
+    background: lightgray;
+}
+
+.toggle-label {
+    cursor: pointer;
+}
+
 .cont-fold {
 	background: #eee;
-    display: none
 }
 

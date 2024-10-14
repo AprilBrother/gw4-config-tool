@@ -25,6 +25,7 @@ function doneCallback() {
         'dup-filter', 
         'adv-filter',
         'scan-act',
+        'scan-phy',
         'scan-window',
         'filter-uuid',
         'filter-cstm',
@@ -174,8 +175,7 @@ function doneCallback() {
     }
 
     if (compat.supports('phy')) {
-        console.log("phy support:", compat.supports('phy'))
-        // TODO
+        $('div.cont-long').show()
     }
 
     $('#ws-url').change(() => {
@@ -370,9 +370,9 @@ function doneCallback() {
     });
 
     $('.toggle-label').click(function() {
-        let icon = $('#icon-fold').html() == '▶' ? '▼' : '▶'
-        $('#icon-fold').html(icon)
-        $('div.cont-fold').toggle('fold')
+        let icon = $('.icon-fold').html() == '▶' ? '▼' : '▶'
+        $('.icon-fold').html(icon)
+        $('div.cont-fold').toggle('fold', 0)
     })
 
     var validateForm = () => {

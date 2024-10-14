@@ -162,9 +162,11 @@
                 </div>
             </div>
 
-             <label for="toggle" class="toggle-label"><span class="icon-fold" id="icon-fold">&#9654;</span> Additional settings</label>
+            <div class="cont-toggle">
+             <label for="toggle" class="toggle-label"><span class="icon-fold">&#9654;</span> Additional settings</label>
+            </div>
 
-            <div class="cont-fold">
+            <div class="cont-fold hiden">
             <fieldset>
             <legend>&nbsp;</legend>
 
@@ -226,6 +228,14 @@
 				<select id="scan-act" name="scan-act">
 					<option value=0>Passive Scan</option>
 					<option value=1>Active Scan</option>
+				</select>
+            </div>
+
+            <div class="pure-control-group cont-long hiden">
+                <label for="scan-phy">Scan PHY</label>
+				<select id="scan-phy" name="scan-phy">
+					<option value="1">1 Mbps PHY</option>
+					<option value="4">Coded PHY</option>
 				</select>
             </div>
 
