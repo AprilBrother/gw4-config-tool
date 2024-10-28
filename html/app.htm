@@ -23,6 +23,7 @@
                     <option value="1">WebSocket Client</option>
                     <option value="2">HTTP Client</option>
                     <option value="3">MQTT Client</option>
+                    <option value="4">TCP Client</option>
                 </select>
             </div>
 
@@ -51,6 +52,19 @@
                         <option value="1">Enable</option>
                     </select> 
                     <button type="button" class="pure-button btn-cert">Setup Certificates</button>
+                </div>
+            </div>
+
+            <div id="cont-tcp-client">
+                <div class="pure-control-group">
+                    <label for="tcp-host">Host <span class="t-red">*</span></label>
+                    <input id="tcp-host" class="pure-input-1-2" name="tcp-host" placeholder="Domain name or IP for server">
+                </div>
+
+                <div class="pure-control-group">
+                    <label for="tcp-port">Port <span class="t-red">*</span></label>
+                    <input id="tcp-port" name="tcp-port" type="number" min="80" max="65535">
+                    <span class="pure-form-message-inline">Port number, e.g., 8080</span>
                 </div>
             </div>
 

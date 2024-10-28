@@ -41,9 +41,11 @@ function doneCallback() {
         'ws-host',
         'http-host',
         'mqtt-host',
+        'tcp-host',
         'ws-port',
         'http-port',
         'mqtt-port',
+        'tcp-port',
         'ws-url'
     ];
 
@@ -55,10 +57,15 @@ function doneCallback() {
     }
     filterApi = `http://${nodeIp}/${filterUri}`
 
+    if (!compat.supports('tcp')) {
+        $("#conn-type option[value=4]").remove();
+    }
+
     function hideAll() {
         $("#cont-ws-client").hide();
         $("#cont-http-client").hide();
         $("#cont-mqtt-client").hide();
+        $("#cont-tcp-client").hide();
     }
 
     function loadDefault() {
@@ -166,6 +173,11 @@ function doneCallback() {
             case 3:
                 hideAll();
                 $("#cont-mqtt-client").show();
+            break;
+
+            case 4:
+                hideAll();
+                $("#cont-tcp-client").show();
             break;
         }
     });
@@ -294,7 +306,9 @@ function doneCallback() {
         $('#ws-host').val(data['host']);
         $('#http-host').val(data['host']);
         $('#mqtt-host').val(data['host']);
+        $('#tcp-host').val(data['host']);
         $('#ws-port').val(data['port']);
+        $('#tcp-port').val(data['port']);
         $('#http-port').val(data['port']);
         $('#mqtt-port').val(data['port']);
         $('#ws-url').val(data['http-url']);
@@ -359,7 +373,7 @@ function doneCallback() {
         }
     })
 
-    $('#ws-port, #http-port, #mqtt-port').change(function() {
+    $('#ws-port, #http-port, #mqtt-port, #tcp-port').change(function() {
         if ($(this).val() > 65535) {
             $(this).val(65535);
         } else if ($(this).val() < 80) {
