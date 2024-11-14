@@ -427,7 +427,7 @@ function doneCallback() {
     $("#btn-save-app").click(function() {
         if (validateForm()) {
             postDeviceApi("/config", $('#f-app').serialize())
-                .done(data => $("#saveWifiMsg").dialog());
+                .done(data => alert("Changes have been saved."));
         }
     });
 
@@ -523,7 +523,7 @@ function doneCallback() {
             url: filterApi,
             data: $("form#f-filter-mac").serialize(),
             success: function(data) {
-                $("#saveWifiMsg").dialog();
+                alert("Changes have been saved.")
             }
         });
     });
