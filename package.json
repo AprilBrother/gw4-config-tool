@@ -48,6 +48,7 @@
     },
     "scripts": {
         "start": "electron .",
+        "archive": "mkdir -p build && git archive --format zip --output build/archive.zip master",
         "v": "electron -v",
         "lib": "gulp lib",
         "pack": "electron-builder --dir ",
