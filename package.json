@@ -56,6 +56,5 @@
         "dist:win32": "electron-builder --win --ia32",
         "dist:osx": "electron-builder -m",
         "dist:deb": "electron-builder --linux deb"
-    }, 
-    "packageManager": "pnpm@9.12.3"
+    }
 }
