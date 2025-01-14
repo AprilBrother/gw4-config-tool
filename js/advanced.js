@@ -224,11 +224,12 @@ function doneCallback() {
 
     $('body').off('click', '#btn-update');
     $("#btn-update").click(function() {
-        $.post("http://"+indexViewModel.curTreeNodeInfo.ip+"/update", $("form#f-update").serialize())
+        $.post(`http://${indexViewModel.curTreeNodeInfo.ip}/update`, $("form#f-update").serialize())
             .done(function(data) {
                 $("#popupMsg").html("<p>Updating firmware. Please wait a while...</p><div id=bar></div>");
                 $("#popupMsg").dialog({
-                    title: "Updating"
+                    title: "Updating",
+                    position: { my: "left top", at: "left top", of: $('#btn-update') }
                 });
                 $("#bar").progressbar({
                   value: false
