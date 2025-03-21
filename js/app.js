@@ -55,7 +55,7 @@ function doneCallback() {
         filterUri = 'filter_ble'
         $("#conn-type option[value=1]").remove();
     }
-    filterApi = `http://${nodeIp}/${filterUri}`
+    var filterApi = `http://${nodeIp}/${filterUri}`
 
     if (!compat.supports('tcp')) {
         $("#conn-type option[value=4]").remove();
@@ -512,11 +512,19 @@ function doneCallback() {
         $('#cont-one-topic').text($(this).val() + mac)
     })
 
+    function cleanFilter(field, c) {
+        let elt = `#${field}`
+        let raw = $(elt).val()
+        let regex = new RegExp(c, "g")
+        let cont = raw.replace(regex, '').toUpperCase()
+        $(elt).val(cont)
+    }
+
     $("#f-filter-mac").attr('action', filterApi)
     $("#btn-save-mac").click(function() {
-        let rawMac = $('#mac').val()
-        let finalMac = rawMac.replace(/:/g, '').toUpperCase()
-        $('#mac').val(finalMac)
+        cleanFilter('mac', ':')
+        cleanFilter('services', '-')
+        cleanFilter('chars', '-')
 
         $.ajax({
             type: "POST",
