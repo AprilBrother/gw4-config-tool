@@ -514,6 +514,9 @@ function doneCallback() {
 
     function cleanFilter(field, c) {
         let elt = `#${field}`
+        if ($(elt).length == 0) {
+            return
+        }
         let raw = $(elt).val()
         let regex = new RegExp(c, "g")
         let cont = raw.replace(regex, '').toUpperCase()
