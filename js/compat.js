@@ -1,16 +1,13 @@
 const compareVersions = require('compare-versions')
 
-let v = () => {
-    return indexViewModel.curTreeNodeInfo.data.firmwareVer.replace('i', '')
-}
-
 function versionBetween(ver, v1, v2) {
     return ((compareVersions(ver, v1) >= 0) && (compareVersions(ver, v2) < 0)) 
 }
 
 let supports = feature => {
     let ret = false
-    let ver = v()
+    let data = indexViewModel.curTreeNodeInfo.data
+    let ver = data.firmwareVer.replace('i', '')
     switch (feature) {
         case 'metadata':
             ret = compareVersions(ver, '1.5.2')
@@ -31,6 +28,9 @@ let supports = feature => {
             ret = compareVersions(ver, '1.5.22')
         break
         case 'phy':
+            if (data.uartVer != 'undefined' && data.uartVer == '2.2.0') {
+                return versionBetween(ver, '1.5.23', '1.5.999')
+            }
             return versionBetween(ver, '1.7.0', '1.8.0')
         case 'local':
             return versionBetween(ver, '1.8.0', '1.9.0')

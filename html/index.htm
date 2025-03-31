@@ -16,11 +16,11 @@
     <div align="center" id="cont-dashboard">
         <table class="pure-table" width="100%">
             <tr class="pure-table-odd">
-                <td width="150">Firmware Version</td>
+                <td width="150">Firmware version</td>
                 <td id="cont-ver"></td>
             </tr>
             <tr>
-                <td width="150">Hardware Version</td>
+                <td width="150">Hardware version</td>
                 <td id="cont-hardware-ver"></td>
             </tr>
             <tr class="pure-table-odd">
@@ -28,16 +28,20 @@
                 <td id="cont-mac"></td>
             </tr>
             <tr>
-                <td>Serial Number</td>
+                <td>Serial number</td>
                 <td id="cont-sn"></td>
             </tr>
             <tr class="pure-table-odd">
-                <td>IP Address</td>
+                <td>IP address</td>
                 <td id="cont-ip"></td>
             </tr>
             <tr>
                 <td>Basic auth</td>
                 <td id="cont-basic-auth"></td>
+            </tr>
+            <tr class="pure-table-odd hidden" id="cont-uart-ver">
+                <td>BLE FW version</td>
+                <td id="uart-ver"></td>
             </tr>
         </table>
     </div>
@@ -46,7 +50,7 @@
 
 <script>
 function doneCallback() {
-    $.getJSON("http://"+indexViewModel.curTreeNodeInfo.ip+"/info", function(data) {
+    $.getJSON(`http://${indexViewModel.curTreeNodeInfo.ip}/info`, function(data) {
         $("#popupMsg").dialog("close");
         $("#cont-ver").text(data.firmwareVer);
         $("#cont-hardware-ver").text(data.hardwareVer);
@@ -61,8 +65,13 @@ function doneCallback() {
         if (typeof node.data.auth != "undefined") {
             auth = node.data.auth
         }
-        let btn = auth ? `<button class="btn-login pure-button pure-button-primary">Enabled</button>` : 'Disabled'
+        let btn = auth ? '<button class="btn-login pure-button pure-button-primary">Enabled</button>' : 'Disabled'
         $("#cont-basic-auth").html(btn);
+
+        if (typeof node.data.uartVer != "undefined") {
+            $('#uart-ver').text(node.data.uartVer)
+            $('#cont-uart-ver').removeClass('hidden')
+        }
 
         $('#cont-dashboard').off('click', '.btn-login')
         $('#cont-dashboard').on('click', '.btn-login', function() {
