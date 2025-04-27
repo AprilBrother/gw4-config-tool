@@ -11,11 +11,10 @@ jobs:
 
     strategy:
       matrix:
-        os: [
-          {name: 'windows', image: 'windows-latest'}, 
-          {name: 'macos', image: 'macos-latest'},
-          {name: 'macos-x86', image: 'macos-13'}
-        ]
+        os:
+          - {name: 'windows', image: 'windows-latest'}
+          - {name: 'macos', image: 'macos-latest'}
+          - {name: 'macos-x86', image: 'macos-13'}
 
     steps:
       - name: Check out Git repository
