@@ -7,14 +7,14 @@ on:
 
 jobs:
   release:
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.os.image }}
 
     strategy:
       matrix:
         os:
           - {name: 'windows', image: 'windows-latest'}
-          - {name: 'macos', image: 'macos-latest'}
-          - {name: 'macos-x86', image: 'macos-13'}
+          - {name: 'macos-arm64', image: 'macos-latest'}
+          - {name: 'macos-x86', image: 'macos-13.xlarge'}
 
     steps:
       - name: Check out Git repository
