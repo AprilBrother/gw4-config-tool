@@ -56,7 +56,9 @@
 
         SerialPort.list().then(ports => {
             const filteredPorts = ports.filter(port => 
-                port.productId === '1001' && port.vendorId === '303a'
+                typeof port.productId != "undefined" && 
+                    port.productId.toLowerCase() === '1001' && 
+                    port.vendorId.toLowerCase() === '303a'
             )
 
             if (filteredPorts.length > 0) {
