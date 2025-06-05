@@ -18,8 +18,7 @@
         "node-fetch": "^2.7.0",
         "purecss": "^3.0.0",
         "serialport": "^12.0.0",
-        "slip": "^1.0.2",
-        "timeout-signal": "^1.1.0"
+        "slip": "^1.0.2"
     },
     "devDependencies": {
         "electron": "^26.3.0",
