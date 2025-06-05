@@ -1,19 +1,19 @@
 ### How To Run ###
 
-* Install `pnpm` and libraries
+* Install `npm` and libraries
 ```
-pnpm i
+npm install
 ```
 * Run command
 ```
-pnpm start
+npm start
 ```
 
 ### How To Package ###
 
 * Install electron-builder
 ```
-pnpm add -D electron-builder
+npm add -D electron-builder
 ```
 * 打包windows版本
 ```
