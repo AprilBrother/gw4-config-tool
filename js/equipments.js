@@ -4,7 +4,7 @@
 const fs = require('fs');
 const os = require('os');
 const path = require('path'), 
-    timeoutSignal = require('timeout-signal'),
+    timeoutSignal = require('./timeout-signal.js'),
     fetch = require('node-fetch');
 const {ipcRenderer} = require('electron');
 const storage = window.localStorage;
