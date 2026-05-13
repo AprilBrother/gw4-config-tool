@@ -36,6 +36,10 @@ let supports = feature => {
             return versionBetween(ver, '1.8.0', '1.9.0')
         case 'gatt':
             ret = compareVersions(ver, '2.0.0')
+            break;
+        case 'gatt2':
+            // Supports 60+ macs
+            return versionBetween(ver, '3.0.0', '4.0.0')
         break
         default:
         return false

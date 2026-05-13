@@ -519,8 +519,17 @@ function doneCallback() {
         }
         let raw = $(elt).val()
         let regex = new RegExp(c, "g")
-        let cont = raw.replace(regex, '').toUpperCase()
-        $(elt).val(cont)
+        if (compat.supports('gatt2')) {
+            console.log(raw.replace(/\r\n/g, ','))
+            let cont = raw
+                .replace(/\n/g, ',')
+                .replace(regex, '')
+                .toUpperCase()
+            $(elt).val(cont)
+        } else {
+            let cont = raw.replace(regex, '').toUpperCase()
+            $(elt).val(cont)
+        }
     }
 
     $("#f-filter-mac").attr('action', filterApi)
