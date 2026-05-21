@@ -37,8 +37,7 @@
             "target": [
                 "nsis"
             ],
-            "artifactName": "${productName}-setup-${version}.${ext}",
-            "publisherName": "Beijing April Brothers Ltd"
+            "artifactName": "${productName}-setup-${version}.${ext}"
         },
         "publish": [
             {
