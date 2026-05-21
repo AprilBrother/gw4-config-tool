@@ -16,8 +16,8 @@ jobs:
       matrix:
         os:
           - {name: 'windows', image: 'windows-latest'}
-          - {name: 'macos-arm64', image: 'macos-latest'}
-          - {name: 'macos-x86', image: 'macos-latest-large'}
+          # - {name: 'macos-arm64', image: 'macos-latest'}
+          # - {name: 'macos-x86', image: 'macos-latest-large'}
 
     steps:
       - name: Check out Git repository
