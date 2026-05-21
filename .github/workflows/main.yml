@@ -35,7 +35,7 @@ jobs:
           CSC_KEY_PASSWORD: ${{ matrix.os.name == 'windows' && secrets.windows_certs_password || '' }}
         shell: bash
         run: |
-          echo "Building for ${{ matrix.os.name }}"
+          echo "🚀 Building for ${{ matrix.os.name }}"
 
           if [[ "${{ matrix.os.name }}" == "windows" ]]; then
             echo "🔐 Windows code signing enabled"
@@ -46,5 +46,5 @@ jobs:
               --mac \
               -c.mac.identity=null \
               -c.mac.sign=false \
-              -c.mac.hardenRuntime=false
+              -c.mac.hardenedRuntime=false
           fi
