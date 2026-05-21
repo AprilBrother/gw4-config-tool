@@ -25,7 +25,7 @@ let supports = feature => {
             ret = compareVersions(ver, '1.5.16')
         break
         case 'tcp':
-            ret = compareVersions(ver, '1.5.22')
+            return versionBetween(ver, '1.5.22', '1.5.999')
         break
         case 'phy':
             if (data.uartVer != 'undefined' && data.uartVer == '2.2.0') {

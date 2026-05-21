@@ -32,6 +32,7 @@ function doneCallback() {
         'filter-mfg',
         'req-format',
         'metadata',
+        'work-mode',
         'ntp-enabled',
         'hb-int',
         'loop-save',
@@ -55,6 +56,11 @@ function doneCallback() {
         filterUri = 'filter_ble'
         $("#conn-type option[value=1]").remove();
     }
+
+    if (!compat.supports('gatt2')) {
+        $("#cont-work-mode").hide();
+    }
+
     var filterApi = `http://${nodeIp}/${filterUri}`
 
     if (!compat.supports('tcp')) {
@@ -118,13 +124,13 @@ function doneCallback() {
                 $('#services').tagsInput({
                     placeholder: 'Add a service UUID',
                     interactive: true,
-                    delimiter: ['\n', ' '],
+                    delimiter: ['\n', ' ', ','],
                     unique: true
                 })
 
                 $('#chars').tagsInput({
                     placeholder: 'Add a characteristics UUID',
-                    delimiter: ['\n', ' '],
+                    delimiter: ['\n', ' ', ','],
                     unique: true
                 })
             } else {
@@ -145,7 +151,7 @@ function doneCallback() {
             $('#mac').tagsInput({
                 placeholder: 'Add a mac',
                 interactive: true,
-                delimiter: ['\n', ' '],
+                delimiter: ['\n', ' ', ','],
                 unique: true
             })
 
@@ -520,7 +526,6 @@ function doneCallback() {
         let raw = $(elt).val()
         let regex = new RegExp(c, "g")
         if (compat.supports('gatt2')) {
-            console.log(raw.replace(/\r\n/g, ','))
             let cont = raw
                 .replace(/\n/g, ',')
                 .replace(regex, '')

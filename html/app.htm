@@ -17,6 +17,14 @@
         <div>&nbsp;</div>
         <form class="pure-form pure-form-aligned" id="f-app" action="/config" method="post">
 
+            <div class="pure-control-group" id="cont-work-mode">
+                <label for="work-mode">Work mode</label>
+                <select name="work-mode" id="work-mode">
+                    <option value="0">Scan mode</option>
+                    <option value="1">Connection mode</option>
+                </select>
+            </div>
+
             <div class="pure-control-group">
                 <label for="conn-type">Connection Type</label>
                 <select name="conn-type" id="conn-type">
