@@ -31,13 +31,7 @@ jobs:
       - name: Build & Release Electron App
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
           CSC_LINK: ${{ secrets.windows_certs }}
           CSC_KEY_PASSWORD: ${{ secrets.windows_certs_password }}
-          
-        run: |
-          if [[ ${{ startsWith(github.ref, 'refs/tags/v') }} == true ]]; then
-            npx electron-builder --publish always
-          else
-            npx electron-builder
-          fi
+        shell: bash
+        run: npx electron-builder --publish always
