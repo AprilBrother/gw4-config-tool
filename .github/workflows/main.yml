@@ -31,14 +31,20 @@ jobs:
       - name: Build & Release Electron App
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          CSC_LINK: ${{ secrets.windows_certs }}
-          CSC_KEY_PASSWORD: ${{ secrets.windows_certs_password }}
+          CSC_LINK: ${{ matrix.os.name == 'windows' && secrets.windows_certs || '' }}
+          CSC_KEY_PASSWORD: ${{ matrix.os.name == 'windows' && secrets.windows_certs_password || '' }}
         shell: bash
         run: |
+          echo "Building for ${{ matrix.os.name }}"
+
           if [[ "${{ matrix.os.name }}" == "windows" ]]; then
             echo "🔐 Windows code signing enabled"
             npx electron-builder --publish always
           else
             echo "📦 macOS build without code signing"
-            npx electron-builder --publish always --mac -- -c.mac.identity=null
+            npx electron-builder --publish always \
+              --mac \
+              -c.mac.identity=null \
+              -c.mac.sign=false \
+              -c.mac.hardenRuntime=false
           fi
