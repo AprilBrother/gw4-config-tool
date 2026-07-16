@@ -206,11 +206,13 @@ function doneCallback() {
             <option value=0>Stable Branch</option>
             <option value="1">Testing Branch</option>
             </select> 
-            <button class="pure-button pure-button-primary btn-branch">OK</button></p>
+            <button class="pure-button pure-button-primary btn-branch">OK</button>
+            </p>
             <p class="msg-branch">Note: Don't select "Testing Branch" if you don't know what is it</p>
         `);
         $("#popupMsg").dialog({
-            title: "Select Update Branch"
+            title: "Select Update Branch",
+            position: { my: "left top", at: "left top", of: $('#btn-testing') }
         });
     });
 
