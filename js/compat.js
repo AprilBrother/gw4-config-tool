@@ -29,7 +29,7 @@ let supports = feature => {
         break
         case 'phy':
             if (data.uartVer != 'undefined' && data.uartVer == '2.2.0') {
-                return versionBetween(ver, '1.5.23', '1.5.999')
+                return versionBetween(ver, '1.5.23', '1.5.999') || versionBetween(ver, '1.7.0', '1.8.0')
             }
             return versionBetween(ver, '1.7.0', '1.8.0')
         case 'local':
