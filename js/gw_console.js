@@ -2,6 +2,7 @@
     let cliChars = "ab-cli"
     const { SerialPort } = require('serialport')
     const { ReadyParser } = require('@serialport/parser-ready')
+    const STORAGE_KEY = "edit_form_wifi"
 
     function freePort() {
         if (typeof window.serialport == "undefined") {
@@ -29,15 +30,35 @@
             $('.btn-conn-dev').hide()
             $("#console-bar").progressbar("destroy")
             $('.cont-console').show()
+            $("#f-console-wifi :input").prop("disabled", false)
         })
         p.write("\n")
     }
 
+    function loadDraft() {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return;
+        try {
+            const data = JSON.parse(raw);
+            $.each(data, function (name, val) {
+                $('#f-console-wifi').find(`[name="${name}"]`).val(val);
+            });
+        } catch (e) {
+            localStorage.removeItem(STORAGE_KEY);
+        }
+    }
+
     $('.btn-submit-wifi').click(function() {
+        const formObj = {};
+        $('#f-console-wifi').serializeArray().forEach(item => {
+          formObj[item.name] = item.value;
+        });
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(formObj));
+
         let ssid = $('#serial-ssid').val()
         let pw = $('#serial-pw').val()
         let cmd = `connect ${ssid} ${pw}\n`
-        console.log("cmd", cmd)
+        //console.log("cmd", cmd)
         window.serialport.write(cmd)
         freePort()
         alert("Saved. Restarting the device..")
@@ -46,6 +67,8 @@
     })
 
     $('.btn-conn-dev').click(function() {
+        freePort()
+        loadDraft()
         $(this).attr('disabled', true)
         $("#console-bar").progressbar({
             value: false
