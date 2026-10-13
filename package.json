@@ -21,8 +21,8 @@
         "slip": "^1.0.2"
     },
     "devDependencies": {
-        "electron": "26.3.0",
-        "electron-builder": "^23.6.0",
+        "electron": "44.7.0",
+        "electron-builder": "^26.17.0",
         "gulp": "^5.0.0"
     },
     "author": {
