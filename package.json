@@ -10,6 +10,7 @@
     },
     "dependencies": {
         "@serialport/parser-ready": "^12.0.0",
+        "bonjour-service": "^1.4.4",
         "compare-versions": "^4.1.3",
         "i18next": "^23.10.1",
         "jquery": "^3.6.0",

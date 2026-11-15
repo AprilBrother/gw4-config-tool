@@ -7,9 +7,15 @@ const path = require('path'),
     timeoutSignal = require('./timeout-signal.js'),
     fetch = require('node-fetch');
 const {ipcRenderer} = require('electron');
+const {Bonjour} = require('bonjour-service');
 const storage = window.localStorage;
 
 window.KEY_DEFAULT_CONFIG = "__def_conf";
+
+// mDNS (DNS-SD) service type advertised by the gateways: _xbg._tcp
+window.MDNS_SERVICE_TYPE = "xbg";
+// how long to browse for mDNS devices before falling back to IP polling
+window.MDNS_TIMEOUT = 4000;
 
 function configApp(nodeInfo) {
     $("#main").load("./html/index.htm")
@@ -36,15 +42,91 @@ var renderDeviceItem = (host, data) => {
     }
 };
 
-var fetchDeviceInfo = (end_addr) => {
+var fetchDeviceInfo = (end_addr, via) => {
+    via = via || "IP scan";
     var addr = `http://${end_addr}/info`;
     fetch(addr, {signal: timeoutSignal(5000)})
         .then(res => res.json())
-        .then(json => renderDeviceItem(end_addr, json))
+        .then(json => {
+            if (json && json.mac)
+                console.log(`[${via}] ${end_addr} ${json.mac}`);
+            renderDeviceItem(end_addr, json);
+        })
         .catch(err => {});
 };
 
+var setReloadEnabled = (delay) => {
+    setTimeout(function() {
+        $(".btn-reload")
+            .text("Reload")
+            .prop("disabled", false);
+    }, delay);
+};
+
+/**
+ * Discover gateways over mDNS (DNS-SD), browsing _<MDNS_SERVICE_TYPE>._tcp.
+ * Calls back with the list of IPv4 addresses found; empty if nothing answers
+ * before MDNS_TIMEOUT.
+ */
+var discoverByMdns = (callback) => {
+    var bonjour = null,
+        timer = null,
+        finished = false,
+        found = [];
+
+    var finish = () => {
+        if (finished)
+            return;
+        finished = true;
+        if (timer)
+            clearTimeout(timer);
+        try {
+            if (bonjour)
+                bonjour.destroy();
+        } catch (err) {}
+        callback(found);
+    };
+
+    try {
+        bonjour = new Bonjour();
+        var browser = bonjour.find({
+            type: window.MDNS_SERVICE_TYPE,
+            protocol: 'tcp'
+        });
+        browser.on('up', (service) => {
+            (service.addresses || []).forEach((addr) => {
+                if (/^\d+\.\d+\.\d+\.\d+$/.test(addr) &&
+                    !addr.startsWith("169.254") &&
+                    found.indexOf(addr) < 0) {
+                    found.push(addr);
+                }
+            });
+        });
+    } catch (err) {
+        console.log("[mDNS] browse failed:", err.message || err);
+        finish();
+        return;
+    }
+
+    timer = setTimeout(finish, window.MDNS_TIMEOUT);
+};
+
 function loadGateways(node) {
+    clearDevices();
+    console.log("[discover] try mDNS first");
+    discoverByMdns(function(hosts) {
+        if (hosts.length) {
+            hosts.forEach((host) => fetchDeviceInfo(host, "mDNS"));
+            setReloadEnabled(15000);
+            return;
+        }
+        console.log("[discover] no device via mDNS, fallback to IP polling");
+        scanGatewaysByIp();
+    });
+}
+
+function scanGatewaysByIp() {
+    console.log("[IP scan] polling local subnets");
     var interfaces=os.networkInterfaces();
     var ips=[];
     for(var intf in interfaces) {
@@ -94,8 +176,8 @@ function loadGateways(node) {
         var base=mask & ip;
         ip=base;
         start_addr=(0xFF&(ip>>24)).toString()+"."+(0xFF&(ip>>16))+"."+(0xFF&(ip>>8))+"."+(ip&255);
+        console.log(`[IP scan] scanning from ${start_addr} (mask ${e.netmask})`);
 
-        clearDevices();
         for(;(mask & ip) == base;ip++) {
             end_addr = (0xFF&(ip>>24)).toString() + 
                 "." +
@@ -105,14 +187,10 @@ function loadGateways(node) {
                 "." + 
                 (ip&255);
 
-            fetchDeviceInfo(end_addr);
+            fetchDeviceInfo(end_addr, "IP scan");
         }
 
-        setTimeout(function() {
-            $(".btn-reload")
-                .text("Reload")
-                .prop("disabled", false);
-        }, 15000);
+        setReloadEnabled(15000);
     });
 };
 
